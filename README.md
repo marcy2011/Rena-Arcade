@@ -5,4 +5,4 @@ Rena Arcades è un'innovativa organizzazione che si dedica alla creazione di sit
 # Leggi di piú su https://renaarcade.altervista.org/chi-siamo
 I file allegati qui su Git Hub sono solo quelli principali
 # Vedi tutto il sito su https://renaarcade.altervista.org
-# Scarica l'app su https://renaarcade.altervista.org/download.html
+# Scarica l'app su https://renaarcade.altervista.org/download.html o su https://renastore.altervista.org/rena-arcades.html

@@ -1,242 +1,292 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
-    <title>Rena Arcades</title>
-    <link rel="icon" type="image/x-icon" href="https://gamecloudservices.altervista.org/logo.jpg">    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="logo.png">    
+    <title>Rena Developer</title>
+ <style>
+*:focus {
+  outline: none;
+}
 
+button:focus, 
+input:focus, 
+textarea:focus {
+  outline: none;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body, p, h1, h2, h3, a, span {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+</style>
     <style>
+        a, button {
+            cursor: url('cursore.png'), pointer;
+        }
+        
         body {
-            background-color: black;
-            color: white;
+            cursor: url('cursore.png'), pointer;
+        }
+
+        ::selection {
+            background-color: white;
+            color: black;
+        }
+
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --accent-color: #ffffff;
+            --glow-color: rgba(255, 255, 255, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
             font-family: 'Open Sauce', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .header-nav-link {
-            color: white !important;
-        }
-    
-        .header-nav-item {
-            display: inline-block;
-            margin-right: 10px;
-            position: relative;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .header-nav-link {
-            text-decoration: none;
-            color: #333;
-            font-size: 16px;
-            transition: font-size 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            z-index: 1;
-        }
-
-        .header-nav-item:hover .header-nav-link {
-            font-size: 12px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .page-header {
+        .hero {
+            height: 100vh;
             display: flex;
             align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .header-logo {
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+        }
+
+        .hero-logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+            border-radius: 35px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px var(--glow-color);
+        }
+
+        .features {
+            padding: 100px 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 60px;
+            text-shadow: 0 0 15px var(--glow-color);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px var(--glow-color);
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px var(--glow-color);
+        }
+
+        #custom-menu {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            backdrop-filter: blur(5px);
+            z-index: 1000; 
+        }
+
+        #custom-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #custom-menu ul li {
+            margin-bottom: 10px;
+        }
+
+        #custom-menu ul li a {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        #custom-menu ul li a img {
             margin-right: 10px;
+            border-radius: 5px;
         }
 
-        /* Nascondi il menu di navigazione su dispositivi mobili */
-        @media screen and (max-width: 767px) {
-            .header-nav {
-                display: none;
-            }
-            
-            .menu-icon {
-                width: 50px;
-                margin-left: 220px;
-                margin-top: 30px;
-            }
+        #custom-menu ul li a span {
+            font-size: 16px;
         }
-
-        /* Nascondi l'icona del menu su schermi più grandi */
-        @media screen and (min-width: 768px) {
-            .menu-icon {
-                display: none;
-            }
-        }
+        
+        @media (max-width: 768px) {
+    .hero h1 {
+        font-size: 45px; 
+    }
+}
     </style>
-    
 </head>
 <body>
-    <header class="page-header">
-        <div class="header-logo">
-            <a class="header-brand" href="javascript://">
-                <svg class="brand-logo" width="35" height="35" xmlns="logo.jpg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
-                    <img src="https://gamecloudservices.altervista.org/logo.jpg" hspace="15" width="35" height="35" style="border-radius: 30px">
-                </svg>
-            </a>
-        </div>
-        <!-- Mostra solo su dispositivi mobili -->
-        <div class="header-nav">
-            <ul class="nav">
-                <li class="header-nav-item"><a class="header-nav-link ripple ripple-dark" href="https://renaarcade.altervista.org">Home</a></li>
-                <li class="header-nav-item"><a class="header-nav-link ripple ripple-dark" href="https://renaarcade.altervista.org/chi-siamo.html">Chi siamo</a></li>
-                <li class="header-nav-item"><a class="header-nav-link ripple ripple-dark" href="https://renaarcade.altervista.org/giochi.html">Giochi</a></li>
-                <li class="header-nav-item"><a class="header-nav-link ripple ripple-dark" href="https://renaarcade.altervista.org/download.html">Download</a></li>
-            </ul>
-        </div>
-        <!-- Mostra solo su dispositivi mobili -->
-        <a href="https://renaarcade.altervista.org/menu.html">
-            <img src="https://gamecloudservices.altervista.org/menuaperto.png" alt="Menu" class="menu-icon">
-        </a>
-    </header>
-    <h1>Attenzione</h1>
-    <p>Stiamo aggiungendo altri giochi!</p>
-    <h1>Che giochi ci sono?</h1>
-    <p>Puoi trovare giochi di Mojang, PlayStation, Nintendo, SEGA e giochi Arcade</p>
-    <h1>Chi siamo?</h1>
-    <p>Rena Arcades è un'innovativa organizzazione che si dedica alla creazione di siti e app per consentire agli appassionati di videogiochi di godere di un'esperienza di gioco senza bisogno di download senza pari. Con un approccio rivoluzionario, Rena Arcades rende accessibili tutti i tipi di giochi, senza alcun costo per l'utente.
+  <img id="lingua" src="bandierait.png" alt="Lingua" data-alt-src="bandieraen.png">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var languagePopup = document.getElementById('language-popup');
+            var flagImage = document.getElementById('lingua');
 
-        Immagina di poter accedere a una vasta libreria di giochi di ogni genere, dalla frenesia ... </p>
+            flagImage.addEventListener('click', function(event) {
+                event.stopPropagation();
+                languagePopup.style.display = 'block';
+            });
 
-<style>
-    ::selection {
-        background-color: white;
-        color: black;
+            document.getElementById('close-popup').addEventListener('click', function() {
+                languagePopup.style.display = 'none';
+            });
+
+            document.addEventListener('click', function(event) {
+                if (languagePopup.style.display === 'block' && event.target !== languagePopup && !languagePopup.contains(event.target)) {
+                    languagePopup.style.display = 'none';
+                }
+            });
+
+            document.querySelectorAll('.language-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var lang = this.getAttribute('data-lang');
+                    translatePage(lang);
+                    languagePopup.style.display = 'none';
+                });
+            });
+        });
+
+function translatePage(lang) {
+    document.querySelectorAll('[data-translate]').forEach(function(element) {
+        var text = element.getAttribute('data-translate-' + lang);
+        if (text) {
+            element.textContent = text;
+        }
+    });
+
+    var flagImage = document.getElementById('lingua');
+    if (lang === 'en') {
+        flagImage.src = 'bandieraen.png';
+    } else if (lang === 'it') {
+        flagImage.src = 'bandierait.png';
     }
-</style>
-        
-<style>
-  .custom-button {
-    background-color: white;
-    color: black;
-    padding: 10px 20px;
-    border-radius: 15px;
-    border: 2px solid black;
-    transition: all 0.3s ease;
-  }
-
-  .custom-button:hover {
-    background-color: black;
-    color: white;
-    padding: 8px 18px;
-    border: 2px solid black;
-    border-radius: 8px;
-  }
-</style>
-<button onclick="window.location.href='https://renaarcade.altervista.org/chi-siamo.html'" class="custom-button">Continua a leggere</button>
-
-    <h1>Rena Arcades ha un app?</h1>
-    <p>Sì, puoi scaricarla da questo sito, o dal collegamento qui sotto</p>
-<button onclick="window.location.href='https://renaarcade.altervista.org/download.html'" class="custom-button">Scarica</button>
-<h1>Giochi in primo piano</h1>
-<a href="https://renaarcade.altervista.org/minecraft.html" target="_blank" rel="noopener noreferrer">
-  <div class="image-container">
-    <img src="https://gamecloudservices.altervista.org/logominecraft.png" alt="Minecraft Logo">
-  </div>
-</a>
-        <a href="https://renaarcade.altervista.org/Area-51.html" target="_blank" rel="noopener noreferrer">
-  <div class="image-container">
-    <img src="https://gamecloudservices.altervista.org/Area51.png" alt="Area 51 Logo">
-  </div>
-              <a href="https://renaarcade.altervista.org/Gran-Turismo-2.html" target="_blank" rel="noopener noreferrer">
-  <div class="image-container">
-    <img src="https://gamecloudservices.altervista.org/Gran Turismo 2.png" alt="Gran Turismo 2 Logo">
-  </div>
-                        <a href="https://renaarcade.altervista.org/FNAF.html" target="_blank" rel="noopener noreferrer">
-  <div class="image-container">
-    <img src="https://gamecloudservices.altervista.org/FNAF.png" alt="FNAF Logo">
-  </div>
-
-<style>
-.image-container {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  border-radius: 30px;
-  transition: transform 0.3s, margin 0.3s;
-  width: 150px;
 }
-
-.image-container img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.image-container:hover {
-  transform: scale(0.9);
-  margin-right: 20px;
-  margin-bottom: 30px;
-}
-
-@media only screen and (max-width: 768px) {
-    .image-container {
-      margin-left: 10px;
-    }
-
-    .image-container:nth-child(2n) {
-      clear: both;
-    }
-  }
-</style>
-
-<div style="width: 50%; height: 60px;"></div>
-
-
-<div id="custom-menu">
-  <ul>
-    <li><a href="https://renaarcade.altervista.org"><img src="https://gcsapp.altervista.org/homebanner.png" alt="Image 1" width="20"><span>Home</span></a></li>
-    <li><a href="https://renaarcade.altervista.org/chi-siamo.html"><img src="https://gcsapp.altervista.org/accountbanner.png" alt="Image 2" width="18"><span>Chi siamo</span></a></li>
-    <li><a href="https://renaarcade.altervista.org/giochi.html"><img src="https://gcsapp.altervista.org/giochibanner.png" alt="Image 3" width="20"><span>Giochi</span></a></li>
-    <li><a href="https://renaarcade.altervista.org/download.html"><img src="downloadbanner.png" alt="Image 5" width="20"><span>Download</span></a></li>
-  </ul>
-</div>
-  
-<style>
-#custom-menu {
-  display: none;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 10px;
-  padding: 10px;
-  backdrop-filter: blur(5px); /* Aggiunge effetto blur */
-}
-
-#custom-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#custom-menu ul li {
-  margin-bottom: 10px;
-}
-
-#custom-menu ul li a {
-  display: flex;
-  align-items: center;
-  color: #fff;
-  text-decoration: none;
-}
-
-#custom-menu ul li a img {
-  margin-right: 10px;
-  border-radius: 5px;
-}
-
-#custom-menu ul li a span {
-  font-size: 16px;
-}
-</style>
-
-<script>
+    </script>
+    <script>
 document.addEventListener('contextmenu', function(event) {
   event.preventDefault();
-  if (window.innerWidth > 768) { // Mostra il menu solo se la larghezza della finestra è maggiore di 768px (considerato desktop)
+  if (window.innerWidth > 768) { 
     var customMenu = document.getElementById('custom-menu');
     customMenu.style.display = 'block';
     customMenu.style.left = event.pageX + 'px';
@@ -248,5 +298,142 @@ document.addEventListener('click', function(event) {
   var customMenu = document.getElementById('custom-menu');
   customMenu.style.display = 'none';
 });
-
 </script>
+<style>
+    #lingua {
+        cursor: pointer;
+        width: 30px;
+        position: absolute;
+        top: 20px;
+        right: 57px;
+        transform: translateX(50%);
+        border-radius: 20px;
+        z-index: 200;
+    }
+
+    @media screen and (max-width: 600px) {
+        #lingua {
+            margin-top: 30px;
+            right: 50%;
+        }
+    }
+</style>
+<div id="language-popup" class="language-popup">
+    <span id="close-popup" class="close-popup">×</span>
+    <button class="language-btn" data-lang="it">Italiano</button>
+    <button class="language-btn" data-lang="en">English</button>
+</div>
+<style>
+    .language-popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+        z-index: 1000;
+        text-align: center;
+    }
+
+    .language-btn {
+        margin: 20px;
+        padding: 10px 20px;
+        background-color: #ffffff;
+        color: black;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+    
+.language-popup .language-btn {
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+    .language-btn:hover {
+        background-color: black;
+        color: white;
+    }
+    
+        .close-popup {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+    }
+</style>
+    <div id="custom-menu">
+        <ul>
+            <li><a href="https://renadeveloper.altervista.org"><img src="https://gcsapp.altervista.org/homebanner.png" alt="Image 1" width="20"><span>Home</span></a></li>
+            <li><a href="https://renadeveloper.altervista.org/renastore.html"><img src="https://renastore.altervista.org/logostore.png" alt="Image 3" width="22" style="border-radius: 5px;"><span>Rena Store</span></a></li>
+            <li><a href="https://renadeveloper.altervista.org/modelli.html"><img src="modell.png" alt="Image 3" width="22"><span data-translate-it="Modelli" data-translate-en="Templates">Modelli</span></a></li>
+            <li><a href="https://renadeveloper.altervista.org/info.html"><img src="https://gcsapp.altervista.org/accountbanner.png" alt="Image 2" width="18"><span>Info</span></a></li>
+        </ul>
+    </div>
+  
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <img src="logo.png" alt="Logo" class="hero-logo">
+                <h1 class="glow-text">Rena Developer</h1>
+                <p data-translate-it="Crea siti web con HTML, CSS e JavaScript direttamente nel tuo browser" data-translate data-translate-en="Create websites with HTML, CSS, and JavaScript directly in your browser">Crea siti web con HTML, CSS e JavaScript direttamente nel tuo browser</p>
+                <a href="https://renadeveloper.altervista.org/code.html" class="cta-button" data-translate-it="Inizia ora" data-translate data-translate-en="Start now">Inizia ora</a>
+            </div>
+        </section>
+
+<section id="features" class="features">
+    <div class="container">
+        <h2 class="glow-text">Features</h2>
+        <div class="feature-grid">
+            <a href="https://renadeveloper.altervista.org/code.html" class="feature-card floating-element">
+                <div class="feature-icon">
+                    <img src="IDE.png" alt="IDE Logo" style="width: 100px; border-radius: 20px; heights: auto;"> 
+                </div>
+                <h3 class="glow-text" data-translate-it="IDE nel Browser" data-translate data-translate-en="IDE in the Browser">IDE nel Browser</h3>
+                <p data-translate-it="Sviluppa HTML, CSS e JavaScript direttamente nel tuo browser, senza configurazione" data-translate data-translate-en="Code HTML, CSS, and JavaScript directly in your browser, with no setup required">Sviluppa HTML, CSS e JavaScript direttamente nel tuo browser, senza configurazione</p>
+            </a>
+            
+            <a href="https://renadeveloper.altervista.org/modelli.html" class="feature-card floating-element">
+                <div class="feature-icon">
+                    <img src="modell.png" alt="Modelli Logo" style="width: 140px; border-radius: 20px; heights: auto;"> 
+                </div>
+                <h3 class="glow-text" data-translate-it="Modelli" data-translate data-translate-en="Templates">Modelli</h3>
+                <p data-translate-it="Avvia i tuoi progetti con la nostra collezione di modelli personalizzabili" data-translate data-translate-en="Kickstart your projects with our collection of customizable templates">Avvia i tuoi progetti con la nostra collezione di modelli personalizzabili</p>
+            </a>
+            
+            <a href="https://renadeveloper.altervista.org/webkit.html" class="feature-card floating-element">
+                <div class="feature-icon">
+                    <img src="WebKit.png" alt="Rena Developer WebKit Logo" style="width: 100px; border-radius: 20px; heights: auto;"> 
+                </div>
+                <h3 class="glow-text" data-translate-it="Libreria WebKit" data-translate data-translate-en="WebKit Library">Libreria WebKit</h3>
+                <p data-translate-it="Accedi a una vasta raccolta di immagini per migliorare i tuoi design web" data-translate data-translate-en="Access a vast collection of images to enhance your web designs">Accedi a una vasta raccolta di immagini per migliorare i tuoi design web</p>
+            </a>
+            
+            <a href="https://renadeveloper.altervista.org/renastore.html" class="feature-card floating-element">
+                <div class="feature-icon">
+                    <img src="https://renastore.altervista.org/logostore.png" alt="Rena Store Logo" style="width: 100px; border-radius: 20px; heights: auto;"> 
+                </div>
+                <h3 class="glow-text">Rena Store</h3>
+                <p data-translate-it="Pubblica la tua app su Rena Store e raggiungi un pubblico più ampio" data-translate data-translate-en="Publish your app on Rena Store and reach a wider audience">Pubblica la tua app su Rena Store e raggiungi un pubblico più ampio</p>
+            </a>
+        </div>
+    </div>
+</section>
+    </main>
+    <div style="width: 50%; height: 60px;"></div>
+</body>
+</html>

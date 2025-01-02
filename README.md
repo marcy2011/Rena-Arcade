@@ -2,6 +2,8 @@
 
 <img src="https://renaarcade.altervista.org/flagit.png" alt="IT" width="50"> 
 
+#IT
+
 Rena Arcades é un servizio appartenente a Rena che ti permette di giocare ai tuoi giochi preferiti senza download
 
 I file allegati qui su Git Hub sono solo quelli principali
@@ -10,6 +12,8 @@ I file allegati qui su Git Hub sono solo quelli principali
 # Scarica l'app su https://renaarcade.altervista.org/download.html o su https://renastore.altervista.org/rena-arcades.html
 
 <img src="https://renaarcade.altervista.org/flagen.png" alt="EN" width="50"> 
+
+#EN
 
 Rena Arcades is a service belonging to Rena that allows you to play your favorite games without downloads
 

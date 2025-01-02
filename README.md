@@ -10,7 +10,7 @@ I file allegati qui su Git Hub sono solo quelli principali
 </a>
 
   <p id="testo">Ciao, come stai?</p>
-  <img src="flag-en.png" alt="Traduci in inglese" style="cursor: pointer;" onclick="traduci()">
+  <img src="https://renadeveloper.altervista.org/bandieraen.png" alt="Traduci in inglese" style="cursor: pointer;" onclick="traduci()">
 
   <script>
     function traduci() {

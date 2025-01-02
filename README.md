@@ -7,8 +7,7 @@ I file allegati qui su Git Hub sono solo quelli principali
 # Vedi tutto il sito su https://renaarcade.altervista.org
 # Scarica l'app su https://renaarcade.altervista.org/download.html o su https://renastore.altervista.org/rena-arcades.html
 
-<img src="https://renaarcade.altervista.org/flagen.png" alt="EN" width="50">
-# EN
+<img src="https://renaarcade.altervista.org/flagen.png" alt="EN" width="50"> # EN
 Rena Arcades is a service belonging to Rena that allows you to play your favorite games without downloads
 
 The files attached here on GitHub are only the main ones

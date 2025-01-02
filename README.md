@@ -1,4 +1,4 @@
-<p font-size="40">IT</p>
+#IT
 # Rena Arcades
 Rena Arcades é un servizio appartenente a Rena che ti permette di giocare ai tuoi giochi preferiti senza download
 

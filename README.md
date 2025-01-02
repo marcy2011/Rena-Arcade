@@ -8,7 +8,6 @@ I file allegati qui su Git Hub sono solo quelli principali
 # Scarica l'app su https://renaarcade.altervista.org/download.html o su https://renastore.altervista.org/rena-arcades.html
 
 <img src="https://renaarcade.altervista.org/flagen.png" alt="EN" width="50">
-
 # EN
 Rena Arcades is a service belonging to Rena that allows you to play your favorite games without downloads
 

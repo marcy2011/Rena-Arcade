@@ -1,4 +1,4 @@
-<img src="https://renadeveloper.altervista.org/bandierait.png" alt="flag it" width="50" border-radius="10">
+<img src="https://renadeveloper.altervista.org/bandierait.png" alt="flag it" style="width: 50px; border-radius: 10px;>
 # Rena Arcades
 Rena Arcades é un servizio appartenente a Rena che ti permette di giocare ai tuoi giochi preferiti senza download
 

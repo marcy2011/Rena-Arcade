@@ -8,20 +8,3 @@ I file allegati qui su Git Hub sono solo quelli principali
 <a href="https://renastore.altervista.org/rena-arcades.html">
     <img src="https://renadeveloper.altervista.org/downloadrs.png" alt="Download On The Rena Store" width="200">
 </a>
-
-
-  <p id="testo">Ciao, come stai?</p>
-  <img src="https://renadeveloper.altervista.org/bandierait.png" alt="Traduci in inglese" 
-       style="cursor: pointer;" 
-       onclick="traduci();">
-
-  <script>
-    function traduci() {
-      const testi = {
-        "Ciao, come stai?": "Hello, how are you?"
-      };
-      document.querySelectorAll("#testo").forEach(el => {
-        el.textContent = testi[el.textContent] || el.textContent;
-      });
-    }
-  </script>

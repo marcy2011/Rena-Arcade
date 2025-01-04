@@ -11,6 +11,8 @@ I file allegati qui su Git Hub sono solo quelli principali
 # Vedi tutto il sito su https://renaarcade.altervista.org
 # Scarica l'app su https://renaarcade.altervista.org/download.html o su https://renastore.altervista.org/rena-arcades.html
 
+Il precedente Game Cloud Services appartiene a Rena dal 10 marzo 2024 e dal 2 aprile 2024 è Rena Arcades
+
 <img src="https://renaarcade.altervista.org/flagen.png" alt="EN" width="50"> 
 
 # EN
@@ -21,6 +23,9 @@ The files attached here on GitHub are only the main ones
 
 # See the entire site at https://renaarcade.altervista.org.
 # Download the app at https://renaarcade.altervista.org/download.html or at https://renastore.altervista.org/rena-arcades.html.
+
+The former Game Cloud Services has been part of Rena since March 10, 2024, and has been rebranded as Rena Arcades since April 2, 2024
+
 <a href="https://renastore.altervista.org/rena-arcades.html">
     <img src="https://renadeveloper.altervista.org/downloadrs.png" alt="Download On The Rena Store" width="200">
 </a>

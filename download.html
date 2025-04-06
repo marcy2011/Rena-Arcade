@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <title>Rena Arcades - Download</title>
-    <link rel="icon" type="image/x-icon" href="https://gamecloudservices.altervista.org/logo.jpg">    
+    <link rel="icon" type="image/x-icon" href="https://gamecloudservices.altervista.org/logo.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+    <meta property="og:title" content="Rena Store">
+    <meta property="og:description" content="Scarica gratis app apk dal Rena Store">
+    <meta property="og:image" content="logo.png">
+    <meta property="og:url" content="renastore.altervista.org">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+    <style>
+        a,
+        button {
+            cursor: url('cursore.png'), pointer;
+        }
 
+        body {
+            cursor: url('cursore.png'), pointer;
+        }
+    </style>
     <style>
         body {
             background-color: black;
@@ -18,7 +32,7 @@
         .header-nav-link {
             color: white !important;
         }
-    
+
         .header-nav-item {
             display: inline-block;
             margin-right: 10px;
@@ -44,168 +58,244 @@
             align-items: center;
         }
 
-        .header-logo {
-            margin-right: 10px;
+        .page-header {
+            display: flex;
+            align-items: center;
         }
 
-        /* Nascondi il menu di navigazione su dispositivi mobili */
         @media screen and (max-width: 767px) {
             .header-nav {
                 display: none;
             }
-            
+
+            .header-logo {
+                width: 50px;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
             .menu-icon {
                 width: 50px;
-                margin-left: 220px;
+                position: absolute;
+                top: 0;
+                right: 0;
                 margin-top: 30px;
             }
         }
 
-        /* Nascondi l'icona del menu su schermi più grandi */
         @media screen and (min-width: 768px) {
             .menu-icon {
                 display: none;
             }
         }
     </style>
-    
+    <style>
+        .header-logo img {
+            transition: transform 0.3s ease;
+        }
+
+        .header-logo:hover img {
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
+
 <body>
     <header class="page-header">
         <div class="header-logo">
-            <a class="header-brand" href="javascript://">
-                <svg class="brand-logo" width="35" height="35" xmlns="logo.jpg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
-                    <img src="https://gamecloudservices.altervista.org/logo.jpg" hspace="15" width="35" height="35" style="border-radius: 30px">
+            <a class="header-brand" href="https://renaarcade.altervista.org">
+                <svg class="brand-logo" width="35" height="35" xmlns="https://gamecloudservices.altervista.org/logo.jpg"
+                    preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+                    <img src="https://gamecloudservices.altervista.org/logo.jpg" hspace="15" width="35" height="35"
+                        style="border-radius: 30px">
                 </svg>
             </a>
         </div>
-        <!-- Mostra solo su dispositivi mobili -->
         <div class="header-nav">
             <ul class="nav">
-                <li class="header-nav-item"><a class="header-nav-link ripple ripple-dark" href="https://renaarcade.altervista.org">Home</a></li>
-                <li class="header-nav-item"><a class="header-nav-link ripple ripple-dark" href="https://renaarcade.altervista.org/chi-siamo.html">Chi siamo</a></li>
-                <li class="header-nav-item"><a class="header-nav-link ripple ripple-dark" href="https://renaarcade.altervista.org/giochi.html">Giochi</a></li>
-                <li class="header-nav-item"><a class="header-nav-link ripple ripple-dark" href="https://renaarcade.altervista.org/download.html">Download</a></li>
+                <li class="header-nav-item"><a class="header-nav-link ripple ripple-dark"
+                        href="https://renaarcade.altervista.org">Home</a></li>
+                <li class="header-nav-item"><a class="header-nav-link ripple ripple-dark"
+                        href="https://renaarcade.altervista.org/giochi.html" data-translate-it="Giochi"
+                        data-translate-en="Game">Giochi</a></li>
+                <li class="header-nav-item"><a class="header-nav-link ripple ripple-dark"
+                        href="https://renaarcade.altervista.org/download.html">Download</a></li>
             </ul>
         </div>
-        <!-- Mostra solo su dispositivi mobili -->
         <a href="https://renaarcade.altervista.org/menu.html">
             <img src="https://gamecloudservices.altervista.org/menuaperto.png" alt="Menu" class="menu-icon">
         </a>
+        <div id="custom-menu">
+            <ul>
+                <li><a href="https://renaarcade.altervista.org"><img src="https://gcsapp.altervista.org/homebanner.png"
+                            alt="Image 1" width="20"><span>Home</span></a></li>
+                <li><a href="https://renaarcade.altervista.org/giochi.html"><img
+                            src="https://gcsapp.altervista.org/giochibanner.png" alt="Image 3" width="20"><span
+                            data-translate-it="Giochi" data-translate-en="Game">Giochi</span></a></li>
+                <li><a href="https://renaarcade.altervista.org/download.html"><img src="downloadbanner.png"
+                            alt="Image 5" width="20"><span>Download</span></a></li>
+            </ul>
+        </div>
+
+        <style>
+            #custom-menu {
+                display: none;
+                position: absolute;
+                background-color: rgba(0, 0, 0, 0.8);
+                border-radius: 10px;
+                padding: 10px;
+                backdrop-filter: blur(5px);
+            }
+
+            #custom-menu ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #custom-menu ul li {
+                margin-bottom: 10px;
+            }
+
+            #custom-menu ul li a {
+                display: flex;
+                align-items: center;
+                color: #fff;
+                text-decoration: none;
+            }
+
+            #custom-menu ul li a img {
+                margin-right: 10px;
+                border-radius: 5px;
+            }
+
+            #custom-menu ul li a span {
+                font-size: 16px;
+            }
+        </style>
+
+        <script>
+            document.addEventListener('contextmenu', function (event) {
+                event.preventDefault();
+                if (window.innerWidth > 768) {
+                    var customMenu = document.getElementById('custom-menu');
+                    customMenu.style.display = 'block';
+                    customMenu.style.left = event.pageX + 'px';
+                    customMenu.style.top = event.pageY + 'px';
+                }
+            });
+
+            document.addEventListener('click', function (event) {
+                var customMenu = document.getElementById('custom-menu');
+                customMenu.style.display = 'none';
+            });
+        </script>
     </header>
-<div style="text-align: center; margin-top: 30px;">
-    <div style="border-radius: 15%; box-shadow: 0 0 20px white; display: inline-block;">
-        <img src="https://gamecloudservices.altervista.org/logo.jpg" alt="Logo" style="border-radius: 50%; width: 200px; height: 200px;">
-    </div>
-    <div style="margin-top: 10px;">
-        <h1>Rena Arcades App</h1>
-        <a href="https://apk.e-droid.net/apk/app3059219-p1uklj.apk?v=3" style="text-decoration: none;">
-            <button id="btn">Download</button>
+    <div style="width: 50%; height: 50px;"></div>
+    <div style="text-align: center; margin-top: 30px;">
+        <div style="border-radius: 15%; box-shadow: 0 0 20px #333; display: inline-block;">
+            <img src="https://gamecloudservices.altervista.org/logo.jpg" alt="Logo"
+                style="border-radius: 50%; width: 150px; height: 150px;">
+        </div>
+        <div style="margin-top: 10px;">
+            <h1>Rena Arcades App</h1>
+            <a href="https://apk.e-droid.net/apk/app3059219-p1uklj.apk?v=3" style="text-decoration: none;">
+                <button id="download-btn" class="download-button">Download</button>
+            </a>
+        </div>
+        <div style="width: 50%; height: 20px;"></div>
+        <a href="https://renastore.altervista.org/rena-arcades.html" target="_blank">
+            <img src="https://renadeveloper.altervista.org/downloadrs.png" alt="Download On The Rena Store"
+                style="width: 170px; height: auto; pointer-events: none;">
         </a>
+        <style>
+            ::selection {
+                background-color: white;
+                color: black;
+            }
+        </style>
+        <style>
+            .download-button {
+                padding: 10px 20px;
+                text-transform: uppercase;
+                border-radius: 50px;
+                font-size: 17px;
+                font-weight: 500;
+                color: black;
+                text-shadow: none;
+                background: white;
+                cursor: pointer;
+                box-shadow: transparent;
+                border: 1px solid white;
+                transition: 0.5s ease;
+                user-select: none;
+            }
+
+            .download-button:hover,
+            .download-button:focus {
+                color: white;
+                background: #008cff;
+                border: 1px solid #008cff;
+                text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+                box-shadow: 0 0 5px #008cff, 0 0 20px #008cff, 0 0 50px #008cff,
+                    0 0 100px #008cff;
+            }
+        </style>
+
+        <div style="width: 50%; height: 75px;"></div>
+        <style>
+            *:focus {
+                outline: none;
+            }
+
+            button:focus,
+            input:focus,
+            textarea:focus {
+                outline: none;
+            }
+
+            * {
+                -webkit-tap-highlight-color: transparent;
+            }
+        </style>
+
+        <script>
+            function translatePage(lang) {
+                localStorage.setItem('preferredLanguage', lang);
+
+                document.querySelectorAll('[data-translate-it]').forEach(function (el) {
+                    if (lang === 'it') {
+                        el.textContent = el.getAttribute('data-translate-it');
+                    } else if (lang === 'en') {
+                        el.textContent = el.getAttribute('data-translate-en');
+                    }
+                });
+
+                document.querySelectorAll('[data-placeholder-it]').forEach(function (el) {
+                    if (lang === 'it') {
+                        el.setAttribute('placeholder', el.getAttribute('data-placeholder-it'));
+                    } else if (lang === 'en') {
+                        el.setAttribute('placeholder', el.getAttribute('data-placeholder-en'));
+                    }
+                });
+
+                const flagImage = document.getElementById('lingua');
+                if (lang === 'it') {
+                    flagImage.src = 'https://renadeveloper.altervista.org/bandierait.png';
+                } else if (lang === 'en') {
+                    flagImage.src = 'https://renadeveloper.altervista.org/bandieraen.png';
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const savedLang = localStorage.getItem('preferredLanguage');
+                if (savedLang) {
+                    translatePage(savedLang);
+                }
+            });
+        </script>
     </div>
+</body>
 
-<style>
-button {
-  padding: 10px 20px;
-  text-transform: uppercase;
-  border-radius: 8px;
-  font-size: 17px;
-  font-weight: 500;
-  color: #ffffff80;
-  text-shadow: none;
-  background: transparent;
-  cursor: pointer;
-  box-shadow: transparent;
-  border: 1px solid #ffffff80;
-  transition: 0.5s ease;
-  user-select: none;
-}
-
-#btn:hover,
-:focus {
-  color: #ffffff;
-  background: #008cff;
-  border: 1px solid #008cff;
-  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-  box-shadow: 0 0 5px #008cff, 0 0 20px #008cff, 0 0 50px #008cff,
-    0 0 100px #008cff;
-}
-</style>
-
-<style>
-    ::selection {
-        background-color: white;
-        color: black;
-    }
-</style>
-<div style="width: 50%; height: 20px;"></div>
-<a href="https://renastore.altervista.org/rena-arcades.html" target="_blank">
-  <img src="downrenas.png" alt="Download On The Rena Store" style="width: 170px; height: auto; pointer-events: none;">
-</a>
-
-<div style="width: 50%; height: 75px;"></div>
-
-
-<div id="custom-menu">
-  <ul>
-    <li><a href="https://renaarcade.altervista.org"><img src="https://gcsapp.altervista.org/homebanner.png" alt="Image 1" width="20"><span>Home</span></a></li>
-    <li><a href="https://renaarcade.altervista.org/chi-siamo.html"><img src="https://gcsapp.altervista.org/accountbanner.png" alt="Image 2" width="18"><span>Chi siamo</span></a></li>
-    <li><a href="https://renaarcade.altervista.org/giochi.html"><img src="https://gcsapp.altervista.org/giochibanner.png" alt="Image 3" width="20"><span>Giochi</span></a></li>
-    <li><a href="https://renaarcade.altervista.org/download.html"><img src="downloadbanner.png" alt="Image 5" width="20"><span>Download</span></a></li>
-  </ul>
-</div>
-  
-<style>
-#custom-menu {
-  display: none;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 10px;
-  padding: 10px;
-  backdrop-filter: blur(5px); /* Aggiunge effetto blur */
-}
-
-#custom-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#custom-menu ul li {
-  margin-bottom: 10px;
-}
-
-#custom-menu ul li a {
-  display: flex;
-  align-items: center;
-  color: #fff;
-  text-decoration: none;
-}
-
-#custom-menu ul li a img {
-  margin-right: 10px;
-  border-radius: 5px;
-}
-
-#custom-menu ul li a span {
-  font-size: 16px;
-}
-</style>
-
-<script>
-document.addEventListener('contextmenu', function(event) {
-  event.preventDefault();
-  if (window.innerWidth > 768) { // Mostra il menu solo se la larghezza della finestra è maggiore di 768px (considerato desktop)
-    var customMenu = document.getElementById('custom-menu');
-    customMenu.style.display = 'block';
-    customMenu.style.left = event.pageX + 'px';
-    customMenu.style.top = event.pageY + 'px';
-  }
-});
-
-document.addEventListener('click', function(event) {
-  var customMenu = document.getElementById('custom-menu');
-  customMenu.style.display = 'none';
-});
-
-</script>
+</html>

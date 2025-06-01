@@ -1,4 +1,4 @@
-<img src="https://gamecloudservices.altervista.org/logo.jpg" alt="IT" width="50"> 
+<img src="https://gamecloudservices.altervista.org/logo.jpg" alt="IT" width="90" text-align="center" border-radius="20px"> 
 
 # Rena Arcades
 

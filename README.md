@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://gamecloudservices.altervista.org/logo.jpg" alt="IT" width="90" style="border-radius: 20px;">
+  <img src="https://gamecloudservices.altervista.org/logo.jpg" alt="logo" width="90" style="border-radius: 20px;">
 </p>
 
 # Rena Arcades

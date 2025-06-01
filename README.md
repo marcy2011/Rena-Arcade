@@ -1,3 +1,5 @@
+<img src="https://gamecloudservices.altervista.org/logo.jpg" alt="IT" width="50"> 
+
 # Rena Arcades
 
 <img src="https://renaarcade.altervista.org/flagit.png" alt="IT" width="50"> 

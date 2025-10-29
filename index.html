@@ -1,439 +1,1013 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="logo.png">    
-    <title>Rena Developer</title>
- <style>
-*:focus {
-  outline: none;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="https://gamecloudservices.altervista.org/logo.jpg">
+  <title>Rena Arcades</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    *:focus {
+      outline: none;
+    }
 
-button:focus, 
-input:focus, 
-textarea:focus {
-  outline: none;
-}
+    button:focus,
+    input:focus,
+    textarea:focus {
+      outline: none;
+    }
 
-* {
-  -webkit-tap-highlight-color: transparent;
-}
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
 
-body, p, h1, h2, h3, a, span {
-    color: #ffffff;
-    text-decoration: none;
-}
+    body,
+    p,
+    h1,
+    h2,
+    h3,
+    a,
+    span {
+      color: #ffffff;
+      text-decoration: none;
+    }
 
-a {
-    text-decoration: none;
-}
+    a {
+      text-decoration: none;
+    }
 
-a:hover {
-    text-decoration: none;
-}
+    a:hover {
+      text-decoration: none;
+    }
+  </style>
+  <style>
+    a,
+    button {
+      cursor: url('cursore.png'), pointer;
+    }
 
-</style>
-    <style>
-        a, button {
-            cursor: url('cursore.png'), pointer;
-        }
-        
-        body {
-            cursor: url('cursore.png'), pointer;
-        }
+    body {
+      cursor: url('cursore.png'), pointer;
+    }
 
-        ::selection {
-            background-color: white;
-            color: black;
-        }
+    ::selection {
+      background-color: white;
+      color: black;
+    }
 
-        :root {
-            --bg-color: #000000;
-            --text-color: #ffffff;
-            --accent-color: #ffffff;
-            --glow-color: rgba(255, 255, 255, 0.5);
-        }
+    :root {
+      --bg-color: #000000;
+      --text-color: #ffffff;
+      --accent-color: #ffffff;
+      --glow-color: rgba(255, 255, 255, 0.5);
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Open Sauce', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    body {
+      font-family: 'Open Sauce', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
-            z-index: -1;
-        }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+      z-index: -1;
+    }
 
-        .hero-logo {
-            max-width: 150px;
-            margin-bottom: 20px;
-            border-radius: 35px;
-        }
+    .hero-logo {
+      max-width: 150px;
+      margin-bottom: 20px;
+      border-radius: 35px;
+    }
 
-        .hero-content {
-            max-width: 800px;
-        }
+    .hero-content {
+      max-width: 800px;
+    }
 
-        .hero h1 {
-            font-size: 60px;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px var(--glow-color);
-        }
-
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            text-shadow: 0 0 10px var(--glow-color);
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            padding: 15px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px var(--glow-color);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px var(--glow-color);
-        }
-
-        .features {
-            padding: 100px 0;
-        }
-
-        .features h2 {
-            text-align: center;
-            font-size: 40px;
-            margin-bottom: 60px;
-            text-shadow: 0 0 15px var(--glow-color);
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        .feature-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
-        }
-
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px var(--glow-color);
-        }
-
-        .feature-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .floating-element {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .glow-text {
-            text-shadow: 0 0 10px var(--glow-color);
-        }
-
-        #custom-menu {
-            display: none;
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
-            padding: 10px;
-            backdrop-filter: blur(5px);
-            z-index: 1000; 
-        }
-
-        #custom-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        #custom-menu ul li {
-            margin-bottom: 10px;
-        }
-
-        #custom-menu ul li a {
-            display: flex;
-            align-items: center;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        #custom-menu ul li a img {
-            margin-right: 10px;
-            border-radius: 5px;
-        }
-
-        #custom-menu ul li a span {
-            font-size: 16px;
-        }
-        
-        @media (max-width: 768px) {
     .hero h1 {
-        font-size: 45px; 
+      font-size: 60px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px var(--glow-color);
     }
-}
-    </style>
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px var(--glow-color);
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+      padding: 15px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px var(--glow-color);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 30px var(--glow-color);
+    }
+
+    .features {
+      padding: 100px 0;
+    }
+
+    .features h2 {
+      text-align: center;
+      font-size: 40px;
+      margin-bottom: 60px;
+      text-shadow: 0 0 15px var(--glow-color);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .feature-card {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 40px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+
+    .feature-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px var(--glow-color);
+    }
+
+    .feature-card h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    .floating-element {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .glow-text {
+      text-shadow: 0 0 10px var(--glow-color);
+    }
+
+    #custom-menu {
+      display: none;
+      position: absolute;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 15px;
+      padding: 15px;
+      backdrop-filter: blur(20px);
+      z-index: 99999999;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    #custom-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #custom-menu ul li {
+      margin-bottom: 10px;
+    }
+
+    #custom-menu ul li a {
+      display: flex;
+      align-items: center;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    #custom-menu ul li a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+
+    #custom-menu ul li a img {
+      margin-right: 10px;
+      border-radius: 5px;
+    }
+
+    #custom-menu ul li a span {
+      font-size: 16px;
+    }
+
+    #custom-menu ul li a.has-svg span {
+      margin-left: 10px;
+    }
+
+    #custom-menu ul li a img,
+    #custom-menu ul li a svg {
+      width: 22px;
+      height: auto;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 45px;
+      }
+    }
+
+    .profile-menu-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .default-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .profile-menu {
+      display: none;
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 15px;
+      width: 200px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .profile-menu.active {
+      display: block;
+    }
+
+    .profile-menu-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      margin-bottom: 5px;
+    }
+
+    .profile-menu-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-menu-item i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .profile-menu-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 10px 0;
+    }
+
+    .language-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .language-option:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .language-option.active {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .language-content {
+      display: flex;
+      align-items: center;
+    }
+
+    .language-flag {
+      width: 20px;
+      height: 15px;
+      margin-right: 10px;
+      border-radius: 3px;
+    }
+
+    .check-icon {
+      width: 16px;
+      height: 16px;
+      stroke: #4ade80;
+      stroke-width: 2;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .language-option.active .check-icon {
+      opacity: 1;
+    }
+
+    .login-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .login-popup.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .login-popup-content {
+      background: rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 30px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 22px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .close-popup:hover {
+      color: white;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-top: 4px solid #fff;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .profile-menu-container {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .profile-menu {
+        left: 50% !important;
+        right: auto;
+        transform: translateX(-50%) !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <img id="lingua" src="bandierait.png" alt="Lingua" data-alt-src="bandieraen.png">
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var languagePopup = document.getElementById('language-popup');
-            var flagImage = document.getElementById('lingua');
-
-            flagImage.addEventListener('click', function(event) {
-                event.stopPropagation();
-                languagePopup.style.display = 'block';
-            });
-
-            document.getElementById('close-popup').addEventListener('click', function() {
-                languagePopup.style.display = 'none';
-            });
-
-            document.addEventListener('click', function(event) {
-                if (languagePopup.style.display === 'block' && event.target !== languagePopup && !languagePopup.contains(event.target)) {
-                    languagePopup.style.display = 'none';
-                }
-            });
-
-            document.querySelectorAll('.language-btn').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    var lang = this.getAttribute('data-lang');
-                    translatePage(lang);
-                    languagePopup.style.display = 'none';
-                });
-            });
-        });
-
-function translatePage(lang) {
-    document.querySelectorAll('[data-translate]').forEach(function(element) {
-        var text = element.getAttribute('data-translate-' + lang);
-        if (text) {
-            element.textContent = text;
-        }
-    });
-
-    var flagImage = document.getElementById('lingua');
-    if (lang === 'en') {
-        flagImage.src = 'bandieraen.png';
-    } else if (lang === 'it') {
-        flagImage.src = 'bandierait.png';
-    }
-}
-    </script>
-    <script>
-document.addEventListener('contextmenu', function(event) {
-  event.preventDefault();
-  if (window.innerWidth > 768) { 
-    var customMenu = document.getElementById('custom-menu');
-    customMenu.style.display = 'block';
-    customMenu.style.left = event.pageX + 'px';
-    customMenu.style.top = event.pageY + 'px';
-  }
-});
-
-document.addEventListener('click', function(event) {
-  var customMenu = document.getElementById('custom-menu');
-  customMenu.style.display = 'none';
-});
-</script>
-<style>
-    #lingua {
-        cursor: pointer;
-        width: 30px;
-        position: absolute;
-        top: 20px;
-        right: 57px;
-        transform: translateX(50%);
-        border-radius: 20px;
-        z-index: 200;
-    }
-
-    @media screen and (max-width: 600px) {
-        #lingua {
-            margin-top: 30px;
-            right: 50%;
-        }
-    }
-</style>
-<div id="language-popup" class="language-popup">
-    <span id="close-popup" class="close-popup">×</span>
-    <button class="language-btn" data-lang="it">Italiano</button>
-    <button class="language-btn" data-lang="en">English</button>
-</div>
-<style>
-    .language-popup {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(5px);
-        z-index: 1000;
-        text-align: center;
-    }
-
-    .language-btn {
-        margin: 20px;
-        padding: 10px 20px;
-        background-color: #ffffff;
-        color: black;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: all 0.3s ease;
-    }
-    
-.language-popup .language-btn {
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #ffffff;
-    color: black;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    display: block;
-}
-
-    .language-btn:hover {
-        background-color: black;
-        color: white;
-    }
-    
-        .close-popup {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 24px;
-        color: white;
-        cursor: pointer;
-    }
-</style>
-    <div id="custom-menu">
-        <ul>
-            <li><a href="https://renadeveloper.altervista.org"><img src="https://gcsapp.altervista.org/homebanner.png" alt="Image 1" width="20"><span>Home</span></a></li>
-            <li><a href="https://renadeveloper.altervista.org/renastore.html"><img src="https://renastore.altervista.org/logostore.png" alt="Image 3" width="22" style="border-radius: 5px;"><span>Rena Store</span></a></li>
-            <li><a href="https://renadeveloper.altervista.org/modelli.html"><img src="modell.png" alt="Image 3" width="22"><span data-translate-it="Modelli" data-translate-en="Templates">Modelli</span></a></li>
-            <li><a href="https://renadeveloper.altervista.org/info.html"><img src="https://gcsapp.altervista.org/accountbanner.png" alt="Image 2" width="18"><span>Info</span></a></li>
-        </ul>
+  <!-- Profile Menu Container -->
+  <div class="profile-menu-container">
+    <div id="profile-button"></div>
+    <div class="profile-menu" id="profile-menu">
+      <a href="https://rena.altervista.org/account.php" class="profile-menu-item">
+        <i class="fas fa-user"></i>
+        <span data-translate-it="Il mio account" data-translate-en="My Account">Il mio account</span>
+      </a>
+      <div class="profile-menu-divider"></div>
+      <div class="profile-menu-item" style="pointer-events: none; opacity: 0.8;">
+        <i class="fas fa-language"></i>
+        <span data-translate-it="Lingua" data-translate-en="Language">Lingua</span>
+      </div>
+      <div class="language-option" data-lang="it" onclick="translatePage('it')">
+        <div class="language-content">
+          <img src="https://renadeveloper.altervista.org/bandierait.png" class="language-flag" alt="Italiano">
+          <span>Italiano</span>
+        </div>
+        <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <div class="language-option" data-lang="en" onclick="translatePage('en')">
+        <div class="language-content">
+          <img src="https://renadeveloper.altervista.org/bandieraen.png" class="language-flag" alt="English">
+          <span>English</span>
+        </div>
+        <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
     </div>
-  
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <img src="logo.png" alt="Logo" class="hero-logo">
-                <h1 class="glow-text">Rena Developer</h1>
-                <p data-translate-it="Crea siti web con HTML, CSS e JavaScript direttamente nel tuo browser" data-translate data-translate-en="Create websites with HTML, CSS, and JavaScript directly in your browser">Crea siti web con HTML, CSS e JavaScript direttamente nel tuo browser</p>
-                <a href="https://renadeveloper.altervista.org/code.html" class="cta-button" data-translate-it="Inizia ora" data-translate data-translate-en="Start now">Inizia ora</a>
-            </div>
-        </section>
+  </div>
 
-<section id="features" class="features">
-    <div class="container">
+  <!-- Login Popup -->
+  <div class="login-popup" id="loginPopup">
+    <div class="login-popup-content">
+      <span class="close-popup" id="closeLoginPopup">&times;</span>
+      <h3 data-translate-it="Accesso in corso..." data-translate-en="Logging in...">Accesso in corso...</h3>
+      <p data-translate-it="Stai per essere reindirizzato alla pagina di login di Rena ID"
+        data-translate-en="You will be redirected to Rena ID login page">Stai per essere reindirizzato alla pagina di
+        login di Rena ID</p>
+      <div style="text-align: center; margin-top: 20px;">
+        <div class="spinner" style="margin: 0 auto;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Menu -->
+  <div id="custom-menu">
+    <ul>
+      <li><a href="https://renaarcade.altervista.org"><img src="https://gcsapp.altervista.org/homebanner.png"
+            alt="Image 1" width="20"><span>Home</span></a></li>
+      <li><a href="https://renaarcade.altervista.org/giochi.html"><img
+            src="https://gcsapp.altervista.org/giochibanner.png" alt="Image 3" width="20"><span
+            data-translate-it="Giochi" data-translate-en="Game">Giochi</span></a></li>
+      <li><a href="https://renaarcade.altervista.org/download.html"><img src="downloadbanner.png" alt="Image 5"
+            width="20"><span>Download</span></a></li>
+    </ul>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <img src="https://gamecloudservices.altervista.org/logo.jpg" alt="Logo" class="hero-logo">
+        <h1 class="glow-text">Rena Arcades</h1>
+        <p data-translate-it="Gioca direttamente sul tuo browser senza bisogno di nessun download" data-translate
+          data-translate-en="Play directly in your browser with no download required">Gioca direttamente sul tuo browser
+          senza bisogno di nessun download</p>
+        <a href="https://renaarcade.altervista.org/giochi.html" class="cta-button" data-translate-it="Gioca ora"
+          data-translate data-translate-en="Play now">Gioca ora</a>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="container">
         <h2 class="glow-text">Features</h2>
         <div class="feature-grid">
-            <a href="https://renadeveloper.altervista.org/code.html" class="feature-card floating-element">
-                <div class="feature-icon">
-                    <img src="IDE.png" alt="IDE Logo" style="width: 100px; border-radius: 20px; heights: auto;"> 
-                </div>
-                <h3 class="glow-text" data-translate-it="IDE nel Browser" data-translate data-translate-en="IDE in the Browser">IDE nel Browser</h3>
-                <p data-translate-it="Sviluppa HTML, CSS e JavaScript direttamente nel tuo browser, senza configurazione" data-translate data-translate-en="Code HTML, CSS, and JavaScript directly in your browser, with no setup required">Sviluppa HTML, CSS e JavaScript direttamente nel tuo browser, senza configurazione</p>
-            </a>
-            
-            <a href="https://renadeveloper.altervista.org/modelli.html" class="feature-card floating-element">
-                <div class="feature-icon">
-                    <img src="modell.png" alt="Modelli Logo" style="width: 140px; border-radius: 20px; heights: auto;"> 
-                </div>
-                <h3 class="glow-text" data-translate-it="Modelli" data-translate data-translate-en="Templates">Modelli</h3>
-                <p data-translate-it="Avvia i tuoi progetti con la nostra collezione di modelli personalizzabili" data-translate data-translate-en="Kickstart your projects with our collection of customizable templates">Avvia i tuoi progetti con la nostra collezione di modelli personalizzabili</p>
-            </a>
-            
-            <a href="https://renadeveloper.altervista.org/webkit.html" class="feature-card floating-element">
-                <div class="feature-icon">
-                    <img src="WebKit.png" alt="Rena Developer WebKit Logo" style="width: 100px; border-radius: 20px; heights: auto;"> 
-                </div>
-                <h3 class="glow-text" data-translate-it="Libreria WebKit" data-translate data-translate-en="WebKit Library">Libreria WebKit</h3>
-                <p data-translate-it="Accedi a una vasta raccolta di immagini per migliorare i tuoi design web" data-translate data-translate-en="Access a vast collection of images to enhance your web designs">Accedi a una vasta raccolta di immagini per migliorare i tuoi design web</p>
-            </a>
-            
-            <a href="https://renadeveloper.altervista.org/renastore.html" class="feature-card floating-element">
-                <div class="feature-icon">
-                    <img src="https://renastore.altervista.org/logostore.png" alt="Rena Store Logo" style="width: 100px; border-radius: 20px; heights: auto;"> 
-                </div>
-                <h3 class="glow-text">Rena Store</h3>
-                <p data-translate-it="Pubblica la tua app su Rena Store e raggiungi un pubblico più ampio" data-translate data-translate-en="Publish your app on Rena Store and reach a wider audience">Pubblica la tua app su Rena Store e raggiungi un pubblico più ampio</p>
-            </a>
+          <a href="https://renaarcade.altervista.org/giochi.html" class="feature-card floating-element">
+            <div class="feature-icon">
+              <img src="https://gcsapp.altervista.org/giochibanner.png" alt="Giochi Logo"
+                style="width: 100px; border-radius: 20px; height: auto;">
+            </div>
+            <h3 class="glow-text" data-translate-it="Gioca nel Browser" data-translate
+              data-translate-en="Play in the Browser">Gioca nel Browser</h3>
+            <p data-translate-it="Puoi giocare giochi di Mojang, PlayStation, Nintendo, SEGA e giochi Arcade direttamente nel tuo browser"
+              data-translate
+              data-translate-en="You can play games from Mojang, PlayStation, Nintendo, SEGA, and arcade games directly in your browser">
+              Puoi giocare giochi di Mojang, PlayStation, Nintendo, SEGA e giochi Arcade direttamente nel tuo browser
+            </p>
+          </a>
+
+          <a href="https://renaarcade.altervista.org/download.html" class="feature-card floating-element">
+            <div class="feature-icon">
+              <img src="downloadbanner.png" alt="Download Logo"
+                style="width: 100px; border-radius: 20px; height: auto;">
+            </div>
+            <h3 class="glow-text">Download</h3>
+            <p data-translate-it="Scarica l'app APK per Android per giocare dal tuo telefono" data-translate
+              data-translate-en="Download the APK app for Android to play from your phone">Scarica l'app APK per Android
+              per giocare dal tuo telefono</p>
+          </a>
         </div>
-    </div>
-</section>
-    </main>
-    <div style="width: 50%; height: 60px;"></div>
+      </div>
+    </section>
+  </main>
+  <div style="width: 50%; height: 160px;"></div>
+
+  <script>
+    let isVerifyingToken = false;
+    let tokenVerificationInterval = null;
+
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log("DOM completamente caricato");
+      loadSavedLanguage();
+      handleTokenFromURL();
+      setupEventListeners();
+    });
+
+    function setupEventListeners() {
+      console.log("Impostazione event listeners");
+
+      const profileButton = document.getElementById('profile-button');
+      const profileMenu = document.getElementById('profile-menu');
+
+      profileButton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        profileMenu.classList.toggle('active');
+      });
+
+      document.addEventListener('click', function () {
+        profileMenu.classList.remove('active');
+      });
+
+      profileMenu.addEventListener('click', function (e) {
+        e.stopPropagation();
+      });
+
+      document.getElementById('closeLoginPopup').addEventListener('click', function () {
+        document.getElementById('loginPopup').classList.remove('active');
+      });
+
+      // Custom menu event listeners
+      document.addEventListener('contextmenu', function (event) {
+        event.preventDefault();
+        if (window.innerWidth > 768) {
+          var customMenu = document.getElementById('custom-menu');
+          customMenu.style.display = 'block';
+          customMenu.style.left = event.pageX + 'px';
+          customMenu.style.top = event.pageY + 'px';
+        }
+      });
+
+      document.addEventListener('click', function (event) {
+        var customMenu = document.getElementById('custom-menu');
+        customMenu.style.display = 'none';
+      });
+    }
+
+    function openCrossDomainLogin() {
+      console.log("Apertura login cross-domain");
+      document.getElementById('loginPopup').classList.add('active');
+
+      const loginUrl = `https://rena.altervista.org/login.php?external_domain=${encodeURIComponent(window.location.origin)}`;
+
+      const loginWindow = window.open(
+        loginUrl,
+        'RenaLogin',
+        'width=500,height=600,scrollbars=no,resizable=no'
+      );
+
+      if (!loginWindow) {
+        document.getElementById('loginPopup').classList.remove('active');
+        alert('Il browser ha bloccato la popup. Per favore consenti le popup per questo sito.');
+        return;
+      }
+
+      const checkWindowClosed = setInterval(() => {
+        if (loginWindow.closed) {
+          clearInterval(checkWindowClosed);
+          document.getElementById('loginPopup').classList.remove('active');
+          checkLoginStatus();
+        }
+      }, 500);
+
+      setTimeout(() => {
+        if (!loginWindow.closed) {
+          loginWindow.close();
+          document.getElementById('loginPopup').classList.remove('active');
+          alert('Tempo scaduto. Riprova.');
+        }
+      }, 30000);
+    }
+
+    function handleTokenFromURL() {
+      console.log("Controllo token dall'URL");
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get('token');
+      const user_id = urlParams.get('user_id');
+      const username = urlParams.get('username');
+
+      if (token && user_id && username) {
+        console.log("Token trovato nell'URL, salvataggio dati utente");
+        const userData = {
+          status: 'success',
+          user_id: user_id,
+          username: username,
+          token: token
+        };
+
+        localStorage.setItem('user_data', JSON.stringify(userData));
+        updateProfileUI(userData);
+        startTokenVerification();
+        window.history.replaceState({}, document.title, window.location.pathname);
+      } else {
+        checkLoginStatus();
+      }
+    }
+
+    function checkLoginStatus() {
+      console.log("Controllo stato login...");
+      const savedUserData = localStorage.getItem('user_data');
+
+      if (savedUserData) {
+        try {
+          const userData = JSON.parse(savedUserData);
+          console.log("Dati utente trovati:", userData);
+
+          updateProfileUI(userData);
+
+          if (userData.token && !isVerifyingToken) {
+            setTimeout(() => {
+              verifyToken(userData.token)
+                .then(valid => {
+                  console.log("Risultato verifica token:", valid);
+                  if (!valid) {
+                    console.log("Token non valido, pulizia dati");
+                    localStorage.removeItem('user_data');
+                    showLoginUI();
+                  }
+                  else {
+                    refreshUserData();
+                  }
+                })
+                .catch(error => {
+                  console.error("Errore verifica token:", error);
+                });
+            }, 1000);
+          }
+        } catch (e) {
+          console.error("Errore parsing dati utente:", e);
+          localStorage.removeItem('user_data');
+          showLoginUI();
+        }
+      } else {
+        console.log("Nessun dato utente trovato");
+        showLoginUI();
+      }
+    }
+
+    function updateProfileUI(data) {
+      console.log("Aggiornamento UI profilo con dati:", data);
+      const profileButton = document.getElementById('profile-button');
+
+      if (!profileButton) {
+        console.error("Pulsante profilo non trovato");
+        return;
+      }
+
+      profileButton.innerHTML = '';
+
+      if (data && (data.logged_in === true || data.status === 'success' || data.user_id)) {
+        const username = data.username || data.user_id || 'Utente';
+
+        if (data.profile_photo) {
+          console.log("Tentativo di caricamento foto profilo:", data.profile_photo);
+          const img = document.createElement('img');
+          img.className = 'profile-pic';
+          img.alt = 'Foto profilo';
+          img.src = data.profile_photo;
+
+          img.onerror = function () {
+            console.log("Errore nel caricamento dell'immagine profilo, uso avatar predefinito");
+            this.remove();
+
+            const defaultAvatarDiv = document.createElement('div');
+            defaultAvatarDiv.className = 'default-avatar';
+            defaultAvatarDiv.textContent = username.charAt(0).toUpperCase();
+            profileButton.appendChild(defaultAvatarDiv);
+          };
+
+          img.onload = function () {
+            console.log("Immagine profilo caricata con successo");
+            const defaultAvatar = profileButton.querySelector('.default-avatar');
+            if (defaultAvatar) {
+              defaultAvatar.remove();
+            }
+          };
+
+          profileButton.appendChild(img);
+        } else {
+          console.log("Nessuna foto profilo disponibile, uso avatar predefinito");
+          const initial = username.charAt(0).toUpperCase();
+          const defaultAvatarDiv = document.createElement('div');
+          defaultAvatarDiv.className = 'default-avatar';
+          defaultAvatarDiv.textContent = initial;
+          profileButton.appendChild(defaultAvatarDiv);
+        }
+
+        const accountLink = document.querySelector('.profile-menu-item');
+        if (accountLink) {
+          const span = accountLink.querySelector('span');
+          if (span) {
+            span.setAttribute('data-translate-it', 'Il mio account');
+            span.setAttribute('data-translate-en', 'My Account');
+            span.textContent = 'Il mio account';
+          }
+        }
+
+      } else {
+        console.log("Dati utente non validi, mostra UI login");
+        showLoginUI();
+      }
+    }
+
+    function showLoginUI() {
+      console.log("Mostra UI login");
+      const profileButton = document.getElementById('profile-button');
+      const accountLink = document.querySelector('.profile-menu-item');
+
+      if (profileButton && accountLink) {
+        profileButton.innerHTML = '<div class="default-avatar"><i class="fas fa-user"></i></div>';
+
+        const span = accountLink.querySelector('span');
+        if (span) {
+          span.setAttribute('data-translate-it', 'Accedi');
+          span.setAttribute('data-translate-en', 'Login');
+          span.textContent = 'Accedi';
+        }
+
+        accountLink.onclick = function (e) {
+          e.preventDefault();
+          openCrossDomainLogin();
+        };
+      }
+    }
+
+    function verifyToken(token) {
+      if (isVerifyingToken) {
+        console.log("Verifica token già in corso");
+        return Promise.resolve(true);
+      }
+
+      isVerifyingToken = true;
+      console.log("Verifica token:", token);
+
+      const timestamp = new Date().getTime();
+      const url = `https://rena.altervista.org/verify_token.php?token=${token}&t=${timestamp}`;
+
+      return fetch(url, {
+        method: 'GET',
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0'
+        }
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          isVerifyingToken = false;
+          console.log("Risposta verifica token:", data);
+
+          if (data.status === 'success') {
+            const savedUserData = localStorage.getItem('user_data');
+            if (savedUserData) {
+              const userData = JSON.parse(savedUserData);
+              const updatedData = {
+                ...userData,
+                profile_photo: data.profile_photo || userData.profile_photo
+              };
+              localStorage.setItem('user_data', JSON.stringify(updatedData));
+              updateProfileUI(updatedData);
+            }
+            return true;
+          }
+          return false;
+        })
+        .catch(error => {
+          console.error("Errore verifica token:", error);
+          isVerifyingToken = false;
+          return true;
+        });
+    }
+
+    function startTokenVerification() {
+      if (tokenVerificationInterval) {
+        clearInterval(tokenVerificationInterval);
+      }
+
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      const interval = isMobile ? 5 * 60 * 1000 : 30 * 60 * 1000;
+
+      tokenVerificationInterval = setInterval(() => {
+        const savedUserData = localStorage.getItem('user_data');
+        if (savedUserData && !isVerifyingToken) {
+          const userData = JSON.parse(savedUserData);
+          if (userData.token) {
+            console.log("Verifica periodica token");
+            verifyToken(userData.token)
+              .then(valid => {
+                if (!valid) {
+                  console.log("Token non più valido, logout");
+                  localStorage.removeItem('user_data');
+                  showLoginUI();
+                }
+              });
+          }
+        }
+      }, interval);
+    }
+
+    function translatePage(lang) {
+      localStorage.setItem('preferredLanguage', lang);
+
+      document.querySelectorAll('[data-translate-it]').forEach(function (el) {
+        if (lang === 'it') {
+          el.textContent = el.getAttribute('data-translate-it');
+        } else if (lang === 'en') {
+          el.textContent = el.getAttribute('data-translate-en');
+        }
+      });
+
+      updateLanguageIndicator(lang);
+      document.getElementById('profile-menu').classList.remove('active');
+    }
+
+    function updateLanguageIndicator(activeLang) {
+      document.querySelectorAll('.language-option').forEach(function (option) {
+        const lang = option.getAttribute('data-lang');
+        if (lang === activeLang) {
+          option.classList.add('active');
+        } else {
+          option.classList.remove('active');
+        }
+      });
+    }
+
+    function loadSavedLanguage() {
+      const savedLang = localStorage.getItem('preferredLanguage') || 'it';
+      translatePage(savedLang);
+    }
+
+    function refreshUserData() {
+      const savedUserData = localStorage.getItem('user_data');
+      if (savedUserData) {
+        const userData = JSON.parse(savedUserData);
+        if (userData.token) {
+          fetch('https://rena.altervista.org/api.php?action=get_user_data', {
+            headers: {
+              'Authorization': 'Bearer ' + userData.token
+            }
+          })
+            .then(response => response.json())
+            .then(updatedData => {
+              if (!updatedData.error) {
+                const mergedData = { ...userData, ...updatedData };
+                localStorage.setItem('user_data', JSON.stringify(mergedData));
+                updateProfileUI(mergedData);
+              }
+            })
+            .catch(error => {
+              console.error('Errore aggiornamento dati utente:', error);
+            });
+        }
+      }
+    }
+
+    window.logout = function () {
+      localStorage.removeItem('user_data');
+      showLoginUI();
+      document.getElementById('profile-menu').classList.remove('active');
+    };
+
+    // Message listener for cross-domain communication
+    window.addEventListener('message', function (event) {
+      console.log("Messaggio ricevuto:", event.data, "da origine:", event.origin);
+
+      if (event.origin !== 'https://rena.altervista.org') {
+        console.log("Messaggio da origine non autorizzata:", event.origin);
+        return;
+      }
+
+      if (event.data && event.data.status === 'success') {
+        console.log("Login successful, salvataggio dati utente");
+        localStorage.setItem('user_data', JSON.stringify(event.data));
+
+        updateProfileUI(event.data);
+        startTokenVerification();
+
+        document.getElementById('loginPopup').classList.remove('active');
+      } else {
+        console.log("Login fallito o formato messaggio non valido");
+      }
+    });
+
+    checkLoginStatus();
+  </script>
 </body>
 </html>

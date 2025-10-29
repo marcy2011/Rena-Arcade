@@ -1,1543 +1,1857 @@
 <!DOCTYPE html>
 <html lang="it">
-
-<head>
+  <head>
     <title id="page-title">Rena Arcades - Giochi</title>
-    <link rel="icon" type="image/x-icon" href="logo.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <meta property="og:url" content="renaarcade.altervista.org">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
-    <link href="https://api.fontshare.com/v2/css?f[]=open-sauce-one@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta property="og:url" content="renaarcade.altervista.org" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=open-sauce-one@400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: black;
+        color: white;
+        font-family: "Open Sauce One", sans-serif;
+        min-height: 100vh;
+        cursor: url("cursore.png"), auto;
+      }
+
+      main {
+        padding-top: 150px !important;
+      }
+
+      .floating-navbar {
+        position: fixed;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+        padding: 15px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 90%;
+        max-width: 1000px;
+        z-index: 1000;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .floating-navbar:hover {
+        background: rgba(0, 0, 0, 0.4);
+        transform: translateX(-50%) translateY(-2px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .header-brand {
+        text-decoration: none;
+      }
+
+      .header-brand:hover {
+        transform: none;
+      }
+
+      .navbar-nav {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        flex: 1;
+        justify-content: center;
+      }
+
+      .nav-link {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        line-height: 1;
+      }
+
+      .nav-link::before {
+        display: none;
+      }
+
+      .nav-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .nav-link.active {
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+      }
+
+      .navbar-account {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-shrink: 0;
+      }
+
+      .account-menu {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: none;
+      }
+
+      .menu-icon {
+        width: 28px;
+        height: 28px;
+        transition: none;
+        display: block;
+      }
+
+      .menu-icon path {
+        transition: none;
+      }
+
+      .profile-menu-container {
+        position: relative;
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      #profile-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .profile-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .profile-pic:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+
+      .default-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .profile-menu {
+        display: none;
+        position: absolute;
+        top: 65px;
+        right: -15px;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 15px;
+        width: 200px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1000;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
         }
 
-        body {
-            background: black;
-            color: white;
-            font-family: 'Open Sauce One', sans-serif;
-            min-height: 100vh;
-            cursor: url('cursore.png'), auto;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
+      }
 
-main {
-    padding-top: 150px !important; 
-}
+      .profile-menu.active {
+        display: block;
+        z-index: 1001;
+      }
 
+      .profile-menu-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        margin-bottom: 5px;
+      }
+
+      .profile-menu-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .profile-menu-item i {
+        margin-right: 10px;
+        width: 20px;
+        text-align: center;
+      }
+
+      .profile-menu-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 10px 0;
+      }
+
+      .language-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .language-option:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .language-option.active {
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .language-content {
+        display: flex;
+        align-items: center;
+      }
+
+      .language-flag {
+        width: 20px;
+        height: 15px;
+        margin-right: 10px;
+        border-radius: 3px;
+      }
+
+      .check-icon {
+        width: 16px;
+        height: 16px;
+        stroke: #4ade80;
+        stroke-width: 2;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .language-option.active .check-icon {
+        opacity: 1;
+      }
+
+      @media screen and (max-width: 768px) {
         .floating-navbar {
-            position: fixed;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            padding: 15px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 90%;
-            max-width: 1000px;
-            z-index: 1000;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .floating-navbar:hover {
-            background: rgba(0, 0, 0, 0.4);
-            transform: translateX(-50%) translateY(-2px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .header-brand {
-            text-decoration: none;
-        }
-
-        .header-brand:hover {
-            transform: none;
-        }
-
-        .navbar-nav {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            flex: 1;
-            justify-content: center;
-        }
-
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            line-height: 1;
-        }
-
-        .nav-link::before {
-            display: none;
-        }
-
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .nav-link.active {
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
-        }
-
-        .navbar-account {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-shrink: 0;
-        }
-
-        .account-menu {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            transition: none;
-        }
-
-        .menu-icon {
-            width: 28px;
-            height: 28px;
-            transition: none;
-            display: block;
-        }
-
-        .menu-icon path {
-            transition: none;
+          width: 95%;
+          padding: 12px 20px;
+          top: 20px;
+          justify-content: space-between;
         }
 
         .profile-menu-container {
-            position: relative;
-            z-index: 200;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        #profile-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .profile-pic {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .profile-pic:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        .default-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-            font-weight: 600;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .profile-menu {
-            display: none;
-            position: absolute;
-            top: 65px;
-            right: -15px;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 15px;
-            width: 200px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .profile-menu.active {
-            display: block;
-            z-index: 1001;
-        }
-
-        .profile-menu-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            margin-bottom: 5px;
-        }
-
-        .profile-menu-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .profile-menu-item i {
-            margin-right: 10px;
-            width: 20px;
-            text-align: center;
-        }
-
-        .profile-menu-divider {
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            margin: 10px 0;
-        }
-
-        .language-option {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .language-option:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .language-option.active {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .language-content {
-            display: flex;
-            align-items: center;
-        }
-
-        .language-flag {
-            width: 20px;
-            height: 15px;
-            margin-right: 10px;
-            border-radius: 3px;
-        }
-
-        .check-icon {
-            width: 16px;
-            height: 16px;
-            stroke: #4ade80;
-            stroke-width: 2;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .language-option.active .check-icon {
-            opacity: 1;
-        }
-
-        @media screen and (max-width: 768px) {
-            .floating-navbar {
-                width: 95%;
-                padding: 12px 20px;
-                top: 20px;
-                justify-content: space-between;
-            }
-
-            .profile-menu-container {
-                order: 1;
-                flex-grow: 1;
-                display: flex;
-                justify-content: flex-start;
-                margin-left: -7px;
-            }
-
-            .navbar-logo {
-                order: 2;
-                position: static;
-                left: auto;
-                transform: none;
-                flex-shrink: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-grow: 0;
-                height: 100%;
-            }
-
-            .navbar-nav {
-                display: none;
-            }
-
-            .navbar-account {
-                order: 3;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                margin-left: 0;
-                flex-grow: 1;
-                justify-content: flex-end;
-            }
-
-            .menu-icon {
-                width: 28px;
-                height: 28px;
-                transform: translateY(-1px) scaleX(-1);
-            }
-
-            .profile-menu {
-                left: 0 !important;
-                right: auto !important;
-                transform: none !important;
-            }
-        }
-
-        @media screen and (min-width: 769px) {
-            .floating-navbar {
-                top: 30px;
-                max-width: 1100px;
-            }
-
-            .navbar-nav {
-                display: flex;
-                order: 2;
-            }
-
-            .navbar-logo {
-                order: 1;
-            }
-
-            .profile-menu-container {
-                order: 3;
-            }
-
-            .navbar-account {
-                display: none;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            .floating-navbar {
-                padding: 8px 16px;
-            }
-
-            .menu-icon {
-                width: 24px;
-                height: 24px;
-            }
-        }
-
-        #custom-menu {
-            display: none;
-            position: absolute;
-            background: rgba(0, 0, 0, 0.9);
-            border-radius: 15px;
-            padding: 15px;
-            backdrop-filter: blur(20px);
-            z-index: 99999999;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        #custom-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        #custom-menu ul li {
-            margin-bottom: 10px;
-        }
-
-        #custom-menu ul li a {
-            display: flex;
-            align-items: center;
-            color: #fff;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        #custom-menu ul li a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
-        }
-
-        #custom-menu ul li a img {
-            margin-right: 10px;
-            border-radius: 5px;
-        }
-
-        #custom-menu ul li a span {
-            font-size: 16px;
-        }
-
-        #custom-menu ul li a.has-svg span {
-            margin-left: 10px;
-        }
-
-        .custom-menu-svg {
-            width: 22px;
-            height: 22px;
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        main {
-            padding-top: 120px;
-        }
-
-        @media (max-width: 767px) {
-            #custom-menu {
-                display: none !important;
-            }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        ::selection {
-            background-color: white;
-            color: black;
-        }
-
-        *:focus {
-            outline: none;
-        }
-
-        * {
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .login-popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .login-popup.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .login-popup-content {
-            background: rgba(0, 0, 0, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 30px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        .close-popup {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 22px;
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-
-        .close-popup:hover {
-            color: white;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            border-top: 4px solid #fff;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .context-menu-svg {
-            width: 22px !important;
-            height: 22px !important;
-            margin-right: 10px;
+          order: 1;
+          flex-grow: 1;
+          display: flex;
+          justify-content: flex-start;
+          margin-left: -7px;
         }
 
         .navbar-logo {
-            position: relative;
+          order: 2;
+          position: static;
+          left: auto;
+          transform: none;
+          flex-shrink: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-grow: 0;
+          height: 100%;
         }
 
-        .navbar-logo .header-brand {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: block;
+        .navbar-nav {
+          display: none;
         }
 
+        .navbar-account {
+          order: 3;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-left: 0;
+          flex-grow: 1;
+          justify-content: flex-end;
+        }
+
+        .menu-icon {
+          width: 28px;
+          height: 28px;
+          transform: translateY(-1px) scaleX(-1);
+        }
+
+        .profile-menu {
+          left: 0 !important;
+          right: auto !important;
+          transform: none !important;
+        }
+      }
+
+      @media screen and (min-width: 769px) {
+        .floating-navbar {
+          top: 30px;
+          max-width: 1100px;
+        }
+
+        .navbar-nav {
+          display: flex;
+          order: 2;
+        }
+
+        .navbar-logo {
+          order: 1;
+        }
+
+        .profile-menu-container {
+          order: 3;
+        }
+
+        .navbar-account {
+          display: none;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        .floating-navbar {
+          padding: 8px 16px;
+        }
+
+        .menu-icon {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      #custom-menu {
+        display: none;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.9);
+        border-radius: 15px;
+        padding: 15px;
+        backdrop-filter: blur(20px);
+        z-index: 99999999;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      #custom-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      #custom-menu ul li {
+        margin-bottom: 10px;
+      }
+
+      #custom-menu ul li a {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      #custom-menu ul li a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(5px);
+      }
+
+      #custom-menu ul li a img {
+        margin-right: 10px;
+        border-radius: 5px;
+      }
+
+      #custom-menu ul li a span {
+        font-size: 16px;
+      }
+
+      #custom-menu ul li a.has-svg span {
+        margin-left: 10px;
+      }
+
+      .custom-menu-svg {
+        width: 22px;
+        height: 22px;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      main {
+        padding-top: 120px;
+      }
+
+      @media (max-width: 767px) {
+        #custom-menu {
+          display: none !important;
+        }
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      ::selection {
+        background-color: white;
+        color: black;
+      }
+
+      *:focus {
+        outline: none;
+      }
+
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .login-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .login-popup.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .login-popup-content {
+        background: rgba(0, 0, 0, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 30px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+
+      .close-popup {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 22px;
+        cursor: pointer;
+        transition: color 0.2s ease;
+      }
+
+      .close-popup:hover {
+        color: white;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        border-top: 4px solid #fff;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .context-menu-svg {
+        width: 22px !important;
+        height: 22px !important;
+        margin-right: 10px;
+      }
+
+      .navbar-logo {
+        position: relative;
+      }
+
+      .navbar-logo .header-brand {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+      }
+
+      .navbar-logo-img {
+        height: 55px;
+        display: block;
+        border-radius: 30px;
+      }
+
+      @media screen and (min-width: 769px) {
         .navbar-logo-img {
-            height: 55px;
-            display: block;
-            border-radius: 30px;
+          margin-left: 30px;
         }
+      }
 
-        @media screen and (min-width: 769px) {
-            .navbar-logo-img {
-                margin-left: 30px;
-            }
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        background-color: black;
+        color: white;
+      }
+
+      .page-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .search-container {
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .search-input {
+        width: 100%;
+        max-width: 500px;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 15px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        outline: none;
+        transition: background-color 0.3s;
+      }
+
+      .search-input::placeholder {
+        color: #aaa;
+      }
+
+      .search-input:focus {
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+
+      .app-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 2rem;
+        justify-content: center;
+        padding: 0 1rem;
+      }
+
+      @media screen and (max-width: 480px) {
+        .app-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
         }
+      }
 
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: black;
-            color: white;
+      @media screen and (min-width: 481px) and (max-width: 768px) {
+        .app-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.8rem;
         }
+      }
 
-        .page-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+      @media screen and (min-width: 769px) and (max-width: 1024px) {
+        .app-grid {
+          grid-template-columns: repeat(4, 1fr);
         }
+      }
 
-        .search-container {
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: center;
+      @media screen and (min-width: 1025px) and (max-width: 1440px) {
+        .app-grid {
+          grid-template-columns: repeat(5, 1fr);
         }
+      }
 
-        .search-input {
-            width: 100%;
-            max-width: 500px;
-            padding: 0.75rem 1rem;
-            font-size: 1rem;
-            border: none;
-            border-radius: 15px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            outline: none;
-            transition: background-color 0.3s;
+      @media screen and (min-width: 1441px) {
+        .app-grid {
+          grid-template-columns: repeat(6, 1fr);
         }
+      }
 
-        .search-input::placeholder {
-            color: #aaa;
-        }
-
-        .search-input:focus {
-            background-color: rgba(255, 255, 255, 0.15);
-        }
-
-.app-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 2rem;
-    justify-content: center;
-    padding: 0 1rem;
-}
-
-@media screen and (max-width: 480px) {
-    .app-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-}
-
-@media screen and (min-width: 481px) and (max-width: 768px) {
-    .app-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.8rem;
-    }
-}
-
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-    .app-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-@media screen and (min-width: 1025px) and (max-width: 1440px) {
-    .app-grid {
-        grid-template-columns: repeat(5, 1fr);
-    }
-}
-
-@media screen and (min-width: 1441px) {
-    .app-grid {
-        grid-template-columns: repeat(6, 1fr);
-    }
-}
-
-.app-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 1.5rem 1rem;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-}
-
-.app-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
-    background-size: 400% 400%;
-    animation: gradientShift 3s ease infinite;
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.app-card:hover {
-    transform: translateY(-8px) scale(1.03);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-}
-
-.app-icon {
-    width: 100px;
-    height: 100px;
-    border-radius: 25px;
-    margin-bottom: 1rem;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-    object-fit: cover;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.app-card:hover .app-icon {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-    transform: scale(1.05);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.app-name {
-    font-size: 0.95rem;
-    color: white;
-    margin: 0;
-    font-weight: 500;
-    max-width: 130px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-decoration: none;
-    padding: 0.3rem 0.5rem;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-}
-
-.app-card:hover .app-name {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-}
-
-.no-results {
-    display: none;
-    text-align: center;
-    margin-top: 3rem;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.no-results svg {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 1.5rem;
-    opacity: 0.7;
-}
-
-.no-results p {
-    font-size: 1.3rem;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 300;
-}
-
-@media screen and (max-width: 480px) {
-    .app-card {
-        padding: 1rem 0.8rem;
-    }
-    
-    .app-icon {
-        width: 85px;
-        height: 85px;
+      .app-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.05);
         border-radius: 20px;
-    }
-    
-    .app-name {
-        font-size: 0.85rem;
-        max-width: 100px;
-    }
-}
+        padding: 1.5rem 1rem;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
 
-.app-grid::-webkit-scrollbar {
-    width: 8px;
-}
+      .app-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+        background-size: 400% 400%;
+        animation: gradientShift 3s ease infinite;
+      }
 
-.app-grid::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-}
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
 
-.app-grid::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-}
+      .app-card:hover {
+        transform: translateY(-8px) scale(1.03);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      }
 
-.app-grid::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
+      .app-icon {
+        width: 100px;
+        height: 100px;
+        border-radius: 25px;
+        margin-bottom: 1rem;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        object-fit: cover;
+        transition: all 0.3s ease;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+      }
 
-        .page-title {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-            font-weight: 600;
+      .app-card:hover .app-icon {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+        transform: scale(1.05);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .app-name {
+        font-size: 0.95rem;
+        color: white;
+        margin: 0;
+        font-weight: 500;
+        max-width: 130px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-decoration: none;
+        padding: 0.3rem 0.5rem;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .app-card:hover .app-name {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .no-results {
+        display: none;
+        text-align: center;
+        margin-top: 3rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .no-results svg {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 1.5rem;
+        opacity: 0.7;
+      }
+
+      .no-results p {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 300;
+      }
+
+      @media screen and (max-width: 480px) {
+        .app-card {
+          padding: 1rem 0.8rem;
         }
 
-        .page-subtitle {
-            text-align: center;
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.7);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .app-icon {
+          width: 85px;
+          height: 85px;
+          border-radius: 20px;
         }
+
+        .app-name {
+          font-size: 0.85rem;
+          max-width: 100px;
+        }
+      }
+
+      .app-grid::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .app-grid::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+      }
+
+      .app-grid::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+      }
+
+      .app-grid::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+        font-weight: 600;
+      }
+
+      .page-subtitle {
+        text-align: center;
+        margin-bottom: 3rem;
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.7);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <nav class="floating-navbar">
-        <div class="profile-menu-container">
-            <div id="profile-button"></div>
-            <div class="profile-menu" id="profile-menu">
-                <a href="https://rena.altervista.org/account.php" class="profile-menu-item" id="account-link">
-                    <i class="fas fa-user"></i>
-                    <span data-translate-it="Il mio account" data-translate-en="My Account">Il mio account</span>
-                </a>
-                <div class="profile-menu-divider"></div>
-                <div class="profile-menu-item" style="pointer-events: none; opacity: 0.8;">
-                    <i class="fas fa-language"></i>
-                    <span data-translate-it="Lingua" data-translate-en="Language">Lingua</span>
-                </div>
-                <div class="language-option" data-lang="it" onclick="translatePage('it')">
-                    <div class="language-content">
-                        <img src="https://renadeveloper.altervista.org/bandierait.png" class="language-flag" alt="Italiano">
-                        <span>Italiano</span>
-                    </div>
-                    <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                </div>
-                <div class="language-option" data-lang="en" onclick="translatePage('en')">
-                    <div class="language-content">
-                        <img src="https://renadeveloper.altervista.org/bandieraen.png" class="language-flag" alt="English">
-                        <span>English</span>
-                    </div>
-                    <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                </div>
+      <div class="profile-menu-container">
+        <div id="profile-button"></div>
+        <div class="profile-menu" id="profile-menu">
+          <a
+            href="https://rena.altervista.org/account.php"
+            class="profile-menu-item"
+            id="account-link"
+          >
+            <i class="fas fa-user"></i>
+            <span
+              data-translate-it="Il mio account"
+              data-translate-en="My Account"
+              >Il mio account</span
+            >
+          </a>
+          <div class="profile-menu-divider"></div>
+          <div
+            class="profile-menu-item"
+            style="pointer-events: none; opacity: 0.8"
+          >
+            <i class="fas fa-language"></i>
+            <span data-translate-it="Lingua" data-translate-en="Language"
+              >Lingua</span
+            >
+          </div>
+          <div
+            class="language-option"
+            data-lang="it"
+            onclick="translatePage('it')"
+          >
+            <div class="language-content">
+              <img
+                src="https://renadeveloper.altervista.org/bandierait.png"
+                class="language-flag"
+                alt="Italiano"
+              />
+              <span>Italiano</span>
             </div>
-        </div>
-
-        <div class="navbar-logo">
-            <a class="header-brand" href="https://renaarcade.altervista.org">
-                <img src="logo-ra-transparent.png" alt="Rena Arcades" class="navbar-logo-img">
-            </a>
-        </div>
-
-        <div class="navbar-nav">
-            <a href="https://renaarcade.altervista.org" class="nav-link">
-                <img src="https://gcsapp.altervista.org/homebanner.png" alt="Home" width="19">
-                <span>Home</span>
-            </a>
-            <a href="https://renaarcade.altervista.org/giochi.html" class="nav-link active">
-                <img src="https://gcsapp.altervista.org/giochibanner.png" alt="Giochi" width="20">
-                <span data-translate-it="Giochi" data-translate-en="Games">Giochi</span>
-            </a>
-            <a href="https://renaarcade.altervista.org/download.html" class="nav-link">
-                <img src="downloadbanner.png" alt="Download" width="22">
-                <span>Download</span>
-            </a>
-        </div>
-
-        <div class="navbar-account">
-            <div class="account-menu">
-                <a href="https://renaarcade.altervista.org/menu.html">
-                    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        transform="rotate(0)matrix(-1, 0, 0, 1, 0, 0)" stroke="#ffffff">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path d="M4 6H20M4 12H14M4 18H9" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                        </g>
-                    </svg>
-                </a>
+            <svg
+              class="check-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M5 13l4 4L19 7"
+              ></path>
+            </svg>
+          </div>
+          <div
+            class="language-option"
+            data-lang="en"
+            onclick="translatePage('en')"
+          >
+            <div class="language-content">
+              <img
+                src="https://renadeveloper.altervista.org/bandieraen.png"
+                class="language-flag"
+                alt="English"
+              />
+              <span>English</span>
             </div>
+            <svg
+              class="check-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M5 13l4 4L19 7"
+              ></path>
+            </svg>
+          </div>
         </div>
+      </div>
+
+      <div class="navbar-logo">
+        <a class="header-brand" href="https://renaarcade.altervista.org">
+          <img
+            src="logo-ra-transparent.png"
+            alt="Rena Arcades"
+            class="navbar-logo-img"
+          />
+        </a>
+      </div>
+
+      <div class="navbar-nav">
+        <a href="https://renaarcade.altervista.org" class="nav-link">
+          <img
+            src="https://gcsapp.altervista.org/homebanner.png"
+            alt="Home"
+            width="19"
+          />
+          <span>Home</span>
+        </a>
+        <a
+          href="https://renaarcade.altervista.org/giochi.html"
+          class="nav-link active"
+        >
+          <img
+            src="https://gcsapp.altervista.org/giochibanner.png"
+            alt="Giochi"
+            width="20"
+          />
+          <span data-translate-it="Giochi" data-translate-en="Games"
+            >Giochi</span
+          >
+        </a>
+        <a
+          href="https://renaarcade.altervista.org/download.html"
+          class="nav-link"
+        >
+          <img src="downloadbanner.png" alt="Download" width="22" />
+          <span>Download</span>
+        </a>
+      </div>
+
+      <div class="navbar-account">
+        <div class="account-menu">
+          <a href="https://renaarcade.altervista.org/menu.html">
+            <svg
+              class="menu-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              transform="rotate(0)matrix(-1, 0, 0, 1, 0, 0)"
+              stroke="#ffffff"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M4 6H20M4 12H14M4 18H9"
+                  stroke="#ffffff"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+            </svg>
+          </a>
+        </div>
+      </div>
     </nav>
 
     <div id="custom-menu">
-        <ul>
-            <li><a href="https://renaarcade.altervista.org"><img src="https://gcsapp.altervista.org/homebanner.png"
-                        alt="Image 1" width="20"><span>Home</span></a></li>
-            <li><a href="https://renaarcade.altervista.org/giochi.html"><img
-                        src="https://gcsapp.altervista.org/giochibanner.png" alt="Image 3" width="20"><span
-                        data-translate-it="Giochi" data-translate-en="Games">Giochi</span></a></li>
-            <li><a href="https://renaarcade.altervista.org/download.html"><img src="downloadbanner.png"
-                        alt="Image 5" width="20"><span>Download</span></a></li>
-        </ul>
+      <ul>
+        <li>
+          <a href="https://renaarcade.altervista.org"
+            ><img
+              src="https://gcsapp.altervista.org/homebanner.png"
+              alt="Image 1"
+              width="20"
+            /><span>Home</span></a
+          >
+        </li>
+        <li>
+          <a href="https://renaarcade.altervista.org/giochi.html"
+            ><img
+              src="https://gcsapp.altervista.org/giochibanner.png"
+              alt="Image 3"
+              width="20"
+            /><span data-translate-it="Giochi" data-translate-en="Games"
+              >Giochi</span
+            ></a
+          >
+        </li>
+        <li>
+          <a href="https://renaarcade.altervista.org/download.html"
+            ><img src="downloadbanner.png" alt="Image 5" width="20" /><span
+              >Download</span
+            ></a
+          >
+        </li>
+      </ul>
     </div>
 
     <div class="login-popup" id="loginPopup">
-        <div class="login-popup-content">
-            <span class="close-popup" id="closeLoginPopup">&times;</span>
-            <h3 data-translate-it="Accesso in corso..." data-translate-en="Logging in...">Accesso in corso...</h3>
-            <p data-translate-it="Stai per essere reindirizzato alla pagina di login di Rena ID"
-                data-translate-en="You will be redirected to Rena ID login page">Stai per essere reindirizzato alla pagina di
-                login di Rena ID</p>
-            <div style="text-align: center; margin-top: 20px;">
-                <div class="spinner" style="margin: 0 auto;"></div>
-            </div>
+      <div class="login-popup-content">
+        <span class="close-popup" id="closeLoginPopup">&times;</span>
+        <h3
+          data-translate-it="Accesso in corso..."
+          data-translate-en="Logging in..."
+        >
+          Accesso in corso...
+        </h3>
+        <p
+          data-translate-it="Stai per essere reindirizzato alla pagina di login di Rena ID"
+          data-translate-en="You will be redirected to Rena ID login page"
+        >
+          Stai per essere reindirizzato alla pagina di login di Rena ID
+        </p>
+        <div style="text-align: center; margin-top: 20px">
+          <div class="spinner" style="margin: 0 auto"></div>
         </div>
+      </div>
     </div>
 
     <main class="page-content">
-        <h1 class="page-title" data-translate-it="Giochi" data-translate-en="Games">Giochi</h1>
-        <p class="page-subtitle" data-translate-it="Scopri la nostra collezione di giochi arcade classici e moderni"
-            data-translate-en="Discover our collection of classic and modern arcade games">Scopri la nostra collezione di giochi arcade classici e moderni</p>
-        
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Cerca giochi..." data-placeholder-en="Search games..."
-                data-placeholder-it="Cerca giochi..." aria-label="Cerca giochi">
+      <h1
+        class="page-title"
+        data-translate-it="Giochi"
+        data-translate-en="Games"
+      >
+        Giochi
+      </h1>
+      <p
+        class="page-subtitle"
+        data-translate-it="Scopri la nostra collezione di giochi arcade classici e moderni"
+        data-translate-en="Discover our collection of classic and modern arcade games"
+      >
+        Scopri la nostra collezione di giochi arcade classici e moderni
+      </p>
+
+      <div class="search-container">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Cerca giochi..."
+          data-placeholder-en="Search games..."
+          data-placeholder-it="Cerca giochi..."
+          aria-label="Cerca giochi"
+        />
+      </div>
+
+      <div
+        class="no-results"
+        style="
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        "
+      >
+        <div style="width: 70px; height: auto; margin: 0 auto">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M19.3517 7.61665L15.3929 4.05375C14.2651 3.03868 13.7012 2.53114 13.0092 2.26562L13 5.00011C13 7.35713 13 8.53564 13.7322 9.26787C14.4645 10.0001 15.643 10.0001 18 10.0001H21.5801C21.2175 9.29588 20.5684 8.71164 19.3517 7.61665Z"
+                fill="#ffffff"
+              ></path>
+              <path
+                d="M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2.72548 20.3823 2.44924 19.8327 2.27818 19.1149C2.15904 18.6149 2.09948 18.3649 2.21429 18.0728C2.32911 17.7806 2.58217 17.6119 3.08829 17.2745L3.71429 16.8571C4.49285 16.3381 5.50715 16.3381 6.28571 16.8571C7.3238 17.5492 8.6762 17.5492 9.71429 16.8571C10.4929 16.3381 11.5071 16.3381 12.2857 16.8571C13.3238 17.5492 14.6762 17.5492 15.7143 16.8571C16.4929 16.3381 17.5071 16.3381 18.2857 16.8571C19.3238 17.5492 20.6762 17.5492 21.7143 16.8571C21.8241 16.7839 21.9705 16.8681 21.965 17C21.8873 18.8723 21.6366 20.0203 20.8284 20.8284C19.6569 22 17.7712 22 14 22Z"
+                fill="#ffffff"
+              ></path>
+              <path
+                d="M2 10C2 6.22876 2 4.34315 3.17157 3.17157C4.34315 2 6.23869 2 10.0298 2C10.6358 2 11.1214 2 11.53 2.01666C11.5166 2.09659 11.5095 2.17813 11.5092 2.26057L11.5 5.09497C11.4999 6.19207 11.4998 7.16164 11.6049 7.94316C11.7188 8.79028 11.9803 9.63726 12.6716 10.3285C13.3628 11.0198 14.2098 11.2813 15.0569 11.3952C15.8385 11.5003 16.808 11.5002 17.9051 11.5001L18 11.5001H21.9934V12.3273C21.9973 12.5399 21.8912 12.7392 21.7143 12.8571C20.6762 13.5492 19.3238 13.5492 18.2857 12.8571C17.5071 12.3381 16.4929 12.3381 15.7143 12.8571C14.6762 13.5492 13.3238 13.5492 12.2857 12.8571C11.5071 12.3381 10.4929 12.3381 9.71429 12.8571C8.6762 13.5492 7.3238 13.5492 6.28571 12.8571C5.50715 12.3381 4.49285 12.3381 3.71429 12.8571L3.5547 12.9635C2.87033 13.4198 2.52814 13.6479 2.26407 13.5066C2 13.3653 2 12.954 2 12.1315V10Z"
+                fill="#ffffff"
+              ></path>
+            </g>
+          </svg>
         </div>
-        
-        <div class="no-results" style="flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-        <div style="width: 70px; height: auto; margin: 0 auto;">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M19.3517 7.61665L15.3929 4.05375C14.2651 3.03868 13.7012 2.53114 13.0092 2.26562L13 5.00011C13 7.35713 13 8.53564 13.7322 9.26787C14.4645 10.0001 15.643 10.0001 18 10.0001H21.5801C21.2175 9.29588 20.5684 8.71164 19.3517 7.61665Z" fill="#ffffff"></path> <path d="M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2.72548 20.3823 2.44924 19.8327 2.27818 19.1149C2.15904 18.6149 2.09948 18.3649 2.21429 18.0728C2.32911 17.7806 2.58217 17.6119 3.08829 17.2745L3.71429 16.8571C4.49285 16.3381 5.50715 16.3381 6.28571 16.8571C7.3238 17.5492 8.6762 17.5492 9.71429 16.8571C10.4929 16.3381 11.5071 16.3381 12.2857 16.8571C13.3238 17.5492 14.6762 17.5492 15.7143 16.8571C16.4929 16.3381 17.5071 16.3381 18.2857 16.8571C19.3238 17.5492 20.6762 17.5492 21.7143 16.8571C21.8241 16.7839 21.9705 16.8681 21.965 17C21.8873 18.8723 21.6366 20.0203 20.8284 20.8284C19.6569 22 17.7712 22 14 22Z" fill="#ffffff"></path> <path d="M2 10C2 6.22876 2 4.34315 3.17157 3.17157C4.34315 2 6.23869 2 10.0298 2C10.6358 2 11.1214 2 11.53 2.01666C11.5166 2.09659 11.5095 2.17813 11.5092 2.26057L11.5 5.09497C11.4999 6.19207 11.4998 7.16164 11.6049 7.94316C11.7188 8.79028 11.9803 9.63726 12.6716 10.3285C13.3628 11.0198 14.2098 11.2813 15.0569 11.3952C15.8385 11.5003 16.808 11.5002 17.9051 11.5001L18 11.5001H21.9934V12.3273C21.9973 12.5399 21.8912 12.7392 21.7143 12.8571C20.6762 13.5492 19.3238 13.5492 18.2857 12.8571C17.5071 12.3381 16.4929 12.3381 15.7143 12.8571C14.6762 13.5492 13.3238 13.5492 12.2857 12.8571C11.5071 12.3381 10.4929 12.3381 9.71429 12.8571C8.6762 13.5492 7.3238 13.5492 6.28571 12.8571C5.50715 12.3381 4.49285 12.3381 3.71429 12.8571L3.5547 12.9635C2.87033 13.4198 2.52814 13.6479 2.26407 13.5066C2 13.3653 2 12.954 2 12.1315V10Z" fill="#ffffff"></path> </g></svg>
+        <p
+          data-translate-it="Nessun gioco trovato. Prova a cercare qualcos'altro!"
+          data-translate-en="No game found. Try searching for something else!"
+        >
+          Nessun gioco trovato. Prova a cercare qualcos'altro!
+        </p>
+      </div>
+
+      <div class="app-grid">
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/minecraft.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img
+              src="minecraftlogo.png"
+              alt="Minecraft Logo"
+              class="app-icon"
+            />
+            <p class="app-name">Minecraft</p>
+          </a>
         </div>
-        <p data-translate-it="Nessun gioco trovato. Prova a cercare qualcos'altro!"
-                data-translate-en="No game found. Try searching for something else!">Nessun gioco trovato. Prova a
-                cercare qualcos'altro!</p>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/Hoshi-no-Kirby-Super-Deluxe.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img
+              src="HoshinoKirbySuperDeluxe.png"
+              alt="Hoshi no Kirby Super Deluxe Logo"
+              class="app-icon"
+            />
+            <p class="app-name">Hoshi no Kirby Super Deluxe</p>
+          </a>
         </div>
-        
-        <div class="app-grid">
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/minecraft.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="minecraftlogo.png" alt="Minecraft Logo"
-                        class="app-icon">
-                    <p class="app-name">Minecraft</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/Hoshi-no-Kirby-Super-Deluxe.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="HoshinoKirbySuperDeluxe.png"
-                        alt="Hoshi no Kirby Super Deluxe Logo" class="app-icon">
-                    <p class="app-name">Hoshi no Kirby Super Deluxe</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/Sonic-the-Hedgehog-3.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="SonictheHedgehog3.png"
-                        alt="Sonic the Hedgehog 3 Logo" class="app-icon">
-                    <p class="app-name">Sonic the Hedgehog 3</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/Dragon-Ball-Z-Supersonic-Warriors.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="DragonBallZSupersonicWarriors.png"
-                        alt="Dragon Ball Z Supersonic Warriors Logo" class="app-icon">
-                    <p class="app-name">Dragon Ball Z Supersonic Warriors</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/Pac-Man.html" target="_blank" style="text-decoration: none;">
-                    <img src="pacman.png" alt="Pac Man Logo" class="app-icon">
-                    <p class="app-name">Pac Man</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/007-Racing.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="007racing.png" alt="007 Racing Logo"
-                        class="app-icon">
-                    <p class="app-name">007 Racing</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/Area-51.html" target="_blank" style="text-decoration: none;">
-                    <img src="Area51.png" alt="Area51 Logo" class="app-icon">
-                    <p class="app-name">Area51</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/Ace-Combat-2.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="Acecombat2.png" alt="AceCombat 2 Logo"
-                        class="app-icon">
-                    <p class="app-name">AceCombat 2</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/FIFA-2000.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="FIFA2000.png" alt="FIFA 2000 Logo"
-                        class="app-icon">
-                    <p class="app-name">FIFA 2000</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/Crash-Bandicoot.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="Crashbandicoot.png" alt="Crash Bandicoot Logo"
-                        class="app-icon">
-                    <p class="app-name">Crash Bandicoot</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/Gran-Turismo-2.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="GranTurismo2.png" alt="Gran Turismo 2 Logo"
-                        class="app-icon">
-                    <p class="app-name">Gran Turismo 2</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/ArmedForces.io.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="ArmedForces.io.png" alt="ArmedForces.io Logo"
-                        class="app-icon">
-                    <p class="app-name">ArmedForces.io</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/Super-Mario-Bros.-3-Crowned-Edition.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="SuperMarioBros3CrownedEdition.png"
-                        alt="Super Mario Bros. 3 Crowned Edition Logo" class="app-icon">
-                    <p class="app-name">Super Mario Bros. 3 Crowned Edition</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/Castlevania-Adventure.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="CastlevaniaAdventure.png"
-                        alt="Castlevania Adventure Logo" class="app-icon">
-                    <p class="app-name">Castlevania Adventure</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/Fruit-Ninja.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="FruitNinja.png" alt="FruitNinja Logo"
-                        class="app-icon">
-                    <p class="app-name">FruitNinja</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/FNAF.html" target="_blank" style="text-decoration: none;">
-                    <img src="FNAF.png" alt="FNAF Logo" class="app-icon">
-                    <p class="app-name">FNAF</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/Rayman.html" target="_blank" style="text-decoration: none;">
-                    <img src="raymanra.png" alt="Rayman Logo" class="app-icon">
-                    <p class="app-name">Rayman</p>
-                </a>
-            </div>
-            <div class="app-card">
-                <a href="https://renaarcade.altervista.org/MR-RACER-CAR-RACING.html" target="_blank"
-                    style="text-decoration: none;">
-                    <img src="mrcarra.png" alt="MR RACER CAR RACING Logo"
-                        class="app-icon">
-                    <p class="app-name">MR RACER CAR RACING</p>
-                </a>
-            </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/Sonic-the-Hedgehog-3.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img
+              src="SonictheHedgehog3.png"
+              alt="Sonic the Hedgehog 3 Logo"
+              class="app-icon"
+            />
+            <p class="app-name">Sonic the Hedgehog 3</p>
+          </a>
         </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/Dragon-Ball-Z-Supersonic-Warriors.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img
+              src="DragonBallZSupersonicWarriors.png"
+              alt="Dragon Ball Z Supersonic Warriors Logo"
+              class="app-icon"
+            />
+            <p class="app-name">Dragon Ball Z Supersonic Warriors</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/Pac-Man.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img src="pacman.png" alt="Pac Man Logo" class="app-icon" />
+            <p class="app-name">Pac Man</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/007-Racing.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img src="007racing.png" alt="007 Racing Logo" class="app-icon" />
+            <p class="app-name">007 Racing</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/Area-51.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img src="Area51.png" alt="Area51 Logo" class="app-icon" />
+            <p class="app-name">Area51</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/Ace-Combat-2.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img src="Acecombat2.png" alt="AceCombat 2 Logo" class="app-icon" />
+            <p class="app-name">AceCombat 2</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/FIFA-2000.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img src="FIFA2000.png" alt="FIFA 2000 Logo" class="app-icon" />
+            <p class="app-name">FIFA 2000</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/Crash-Bandicoot.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img
+              src="Crashbandicoot.png"
+              alt="Crash Bandicoot Logo"
+              class="app-icon"
+            />
+            <p class="app-name">Crash Bandicoot</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/Gran-Turismo-2.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img
+              src="GranTurismo2.png"
+              alt="Gran Turismo 2 Logo"
+              class="app-icon"
+            />
+            <p class="app-name">Gran Turismo 2</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/ArmedForces.io.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img
+              src="ArmedForces.io.png"
+              alt="ArmedForces.io Logo"
+              class="app-icon"
+            />
+            <p class="app-name">ArmedForces.io</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/Super-Mario-Bros.-3-Crowned-Edition.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img
+              src="SuperMarioBros3CrownedEdition.png"
+              alt="Super Mario Bros. 3 Crowned Edition Logo"
+              class="app-icon"
+            />
+            <p class="app-name">Super Mario Bros. 3 Crowned Edition</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/Castlevania-Adventure.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img
+              src="CastlevaniaAdventure.png"
+              alt="Castlevania Adventure Logo"
+              class="app-icon"
+            />
+            <p class="app-name">Castlevania Adventure</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/Fruit-Ninja.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img src="FruitNinja.png" alt="FruitNinja Logo" class="app-icon" />
+            <p class="app-name">FruitNinja</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/FNAF.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img src="FNAF.png" alt="FNAF Logo" class="app-icon" />
+            <p class="app-name">FNAF</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/Rayman.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img src="raymanra.png" alt="Rayman Logo" class="app-icon" />
+            <p class="app-name">Rayman</p>
+          </a>
+        </div>
+        <div class="app-card">
+          <a
+            href="https://renaarcade.altervista.org/MR-RACER-CAR-RACING.html"
+            target="_blank"
+            style="text-decoration: none"
+          >
+            <img
+              src="mrcarra.png"
+              alt="MR RACER CAR RACING Logo"
+              class="app-icon"
+            />
+            <p class="app-name">MR RACER CAR RACING</p>
+          </a>
+        </div>
+      </div>
     </main>
 
-<script>
-    document.addEventListener('contextmenu', function (e) {
+    <script>
+      document.addEventListener("contextmenu", function (e) {
         e.preventDefault();
         if (window.innerWidth > 768) {
-            var menu = document.getElementById('custom-menu');
-            menu.style.display = 'block';
-            menu.style.left = e.pageX + 'px';
-            menu.style.top = e.pageY + 'px';
+          var menu = document.getElementById("custom-menu");
+          menu.style.display = "block";
+          menu.style.left = e.pageX + "px";
+          menu.style.top = e.pageY + "px";
         }
-    });
+      });
 
-    document.addEventListener('click', function (event) {
-        var menu = document.getElementById('custom-menu');
-        if (menu && (!menu.contains(event.target) || event.target.tagName === 'A')) {
-            menu.style.display = 'none';
+      document.addEventListener("click", function (event) {
+        var menu = document.getElementById("custom-menu");
+        if (
+          menu &&
+          (!menu.contains(event.target) || event.target.tagName === "A")
+        ) {
+          menu.style.display = "none";
         }
-    });
+      });
 
-    let isVerifyingToken = false;
-    let tokenVerificationInterval = null;
+      let isVerifyingToken = false;
+      let tokenVerificationInterval = null;
 
-    document.addEventListener('DOMContentLoaded', function () {
+      document.addEventListener("DOMContentLoaded", function () {
         console.log("DOM completamente caricato");
         loadSavedLanguage();
         handleTokenFromURL();
         setupEventListeners();
         checkLoginStatus();
-    });
+      });
 
-    function setupEventListeners() {
+      function setupEventListeners() {
         console.log("Impostazione event listeners");
 
-        const profileButton = document.getElementById('profile-button');
-        const profileMenu = document.getElementById('profile-menu');
+        const profileButton = document.getElementById("profile-button");
+        const profileMenu = document.getElementById("profile-menu");
 
         if (profileButton && profileMenu) {
-            profileButton.addEventListener('click', function (e) {
-                e.stopPropagation();
-                profileMenu.classList.toggle('active');
-            });
+          profileButton.addEventListener("click", function (e) {
+            e.stopPropagation();
+            profileMenu.classList.toggle("active");
+          });
 
-            document.addEventListener('click', function () {
-                profileMenu.classList.remove('active');
-            });
+          document.addEventListener("click", function () {
+            profileMenu.classList.remove("active");
+          });
 
-            profileMenu.addEventListener('click', function (e) {
-                e.stopPropagation();
-            });
+          profileMenu.addEventListener("click", function (e) {
+            e.stopPropagation();
+          });
         }
 
-        const closePopup = document.getElementById('closeLoginPopup');
-        const loginPopup = document.getElementById('loginPopup');
+        const closePopup = document.getElementById("closeLoginPopup");
+        const loginPopup = document.getElementById("loginPopup");
 
         if (closePopup && loginPopup) {
-            closePopup.addEventListener('click', function () {
-                loginPopup.classList.remove('active');
-            });
+          closePopup.addEventListener("click", function () {
+            loginPopup.classList.remove("active");
+          });
         }
 
-        const menuIcon = document.querySelector('.menu-icon');
-        if (menuIcon && menuIcon.closest('a')) {
-            menuIcon.closest('a').addEventListener('click', function (e) {
-                e.preventDefault();
-                window.location.href = 'https://renaarcade.altervista.org/menu.html';
-            });
+        const menuIcon = document.querySelector(".menu-icon");
+        if (menuIcon && menuIcon.closest("a")) {
+          menuIcon.closest("a").addEventListener("click", function (e) {
+            e.preventDefault();
+            window.location.href =
+              "https://renaarcade.altervista.org/menu.html";
+          });
         }
-    }
+      }
 
-    function openCrossDomainLogin() {
+      function openCrossDomainLogin() {
         console.log("Apertura login cross-domain");
-        document.getElementById('loginPopup').classList.add('active');
+        document.getElementById("loginPopup").classList.add("active");
 
-        const loginUrl = `https://rena.altervista.org/login.php?external_domain=${encodeURIComponent(window.location.origin)}`;
+        const loginUrl = `https://rena.altervista.org/login.php?external_domain=${encodeURIComponent(
+          window.location.origin
+        )}`;
 
         const loginWindow = window.open(
-            loginUrl,
-            'RenaLogin',
-            'width=500,height=600,scrollbars=no,resizable=no'
+          loginUrl,
+          "RenaLogin",
+          "width=500,height=600,scrollbars=no,resizable=no"
         );
 
         if (!loginWindow) {
-            document.getElementById('loginPopup').classList.remove('active');
-            alert('Il browser ha bloccato la popup. Per favore consenti le popup per questo sito.');
-            return;
+          document.getElementById("loginPopup").classList.remove("active");
+          alert(
+            "Il browser ha bloccato la popup. Per favore consenti le popup per questo sito."
+          );
+          return;
         }
 
         const checkWindowClosed = setInterval(() => {
-            if (loginWindow.closed) {
-                clearInterval(checkWindowClosed);
-                document.getElementById('loginPopup').classList.remove('active');
-                checkLoginStatus();
-            }
+          if (loginWindow.closed) {
+            clearInterval(checkWindowClosed);
+            document.getElementById("loginPopup").classList.remove("active");
+            checkLoginStatus();
+          }
         }, 500);
 
         setTimeout(() => {
-            if (!loginWindow.closed) {
-                loginWindow.close();
-                document.getElementById('loginPopup').classList.remove('active');
-                alert('Tempo scaduto. Riprova.');
-            }
+          if (!loginWindow.closed) {
+            loginWindow.close();
+            document.getElementById("loginPopup").classList.remove("active");
+            alert("Tempo scaduto. Riprova.");
+          }
         }, 30000);
-    }
+      }
 
-    function handleTokenFromURL() {
+      function handleTokenFromURL() {
         console.log("Controllo token dall'URL");
         const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
-        const user_id = urlParams.get('user_id');
-        const username = urlParams.get('username');
+        const token = urlParams.get("token");
+        const user_id = urlParams.get("user_id");
+        const username = urlParams.get("username");
 
         if (token && user_id && username) {
-            console.log("Token trovato nell'URL, salvataggio dati utente");
-            const userData = {
-                status: 'success',
-                user_id: user_id,
-                username: username,
-                token: token,
-                lastVerification: Date.now()
-            };
+          console.log("Token trovato nell'URL, salvataggio dati utente");
+          const userData = {
+            status: "success",
+            user_id: user_id,
+            username: username,
+            token: token,
+            lastVerification: Date.now(),
+          };
 
-            localStorage.setItem('user_data', JSON.stringify(userData));
-            updateProfileUI(userData);
-            startTokenVerification();
-            window.history.replaceState({}, document.title, window.location.pathname);
+          localStorage.setItem("user_data", JSON.stringify(userData));
+          updateProfileUI(userData);
+          startTokenVerification();
+          window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+          );
         } else {
-            checkLoginStatus();
+          checkLoginStatus();
         }
-    }
+      }
 
-    function checkLoginStatus() {
+      function checkLoginStatus() {
         console.log("Controllo stato login...");
-        const savedUserData = localStorage.getItem('user_data');
+        const savedUserData = localStorage.getItem("user_data");
 
         if (savedUserData) {
-            try {
-                const userData = JSON.parse(savedUserData);
-                console.log("Dati utente trovati:", userData);
+          try {
+            const userData = JSON.parse(savedUserData);
+            console.log("Dati utente trovati:", userData);
 
-                updateProfileUI(userData);
+            updateProfileUI(userData);
 
-                if (userData.token && !isVerifyingToken) {
-                    const now = Date.now();
-                    const lastVerification = userData.lastVerification || 0;
+            if (userData.token && !isVerifyingToken) {
+              const now = Date.now();
+              const lastVerification = userData.lastVerification || 0;
 
-                    if (now - lastVerification > 5000) {
-                        isVerifyingToken = true;
-                        console.log("Avvio verifica token dopo ritardo");
+              if (now - lastVerification > 5000) {
+                isVerifyingToken = true;
+                console.log("Avvio verifica token dopo ritardo");
 
-                        setTimeout(() => {
-                            verifyToken(userData.token)
-                                .then(valid => {
-                                    console.log("Risultato verifica token:", valid);
-                                    isVerifyingToken = false;
+                setTimeout(() => {
+                  verifyToken(userData.token)
+                    .then((valid) => {
+                      console.log("Risultato verifica token:", valid);
+                      isVerifyingToken = false;
 
-                                    if (!valid) {
-                                        console.log("Token non valido, tentativo di refresh...");
-                                        refreshUserData();
-                                    } else {
-                                        userData.lastVerification = Date.now();
-                                        localStorage.setItem('user_data', JSON.stringify(userData));
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error("Errore verifica token:", error);
-                                    isVerifyingToken = false;
-                                });
-                        }, 1000);
-                    }
-                }
-            } catch (e) {
-                console.error("Errore parsing dati utente:", e);
-                localStorage.removeItem('user_data');
-                showLoginUI();
+                      if (!valid) {
+                        console.log(
+                          "Token non valido, tentativo di refresh..."
+                        );
+                        refreshUserData();
+                      } else {
+                        userData.lastVerification = Date.now();
+                        localStorage.setItem(
+                          "user_data",
+                          JSON.stringify(userData)
+                        );
+                      }
+                    })
+                    .catch((error) => {
+                      console.error("Errore verifica token:", error);
+                      isVerifyingToken = false;
+                    });
+                }, 1000);
+              }
             }
-        } else {
-            console.log("Nessun dato utente trovato");
+          } catch (e) {
+            console.error("Errore parsing dati utente:", e);
+            localStorage.removeItem("user_data");
             showLoginUI();
+          }
+        } else {
+          console.log("Nessun dato utente trovato");
+          showLoginUI();
         }
-    }
+      }
 
-    window.addEventListener('message', function (event) {
-        console.log("Messaggio ricevuto:", event.data, "da origine:", event.origin);
+      window.addEventListener("message", function (event) {
+        console.log(
+          "Messaggio ricevuto:",
+          event.data,
+          "da origine:",
+          event.origin
+        );
 
         const allowedOrigins = [
-            'https://rena.altervista.org',
-            'https://renadeveloper.altervista.org'
+          "https://rena.altervista.org",
+          "https://renadeveloper.altervista.org",
         ];
 
         if (!allowedOrigins.includes(event.origin)) {
-            console.log("Messaggio da origine non autorizzata:", event.origin);
-            return;
+          console.log("Messaggio da origine non autorizzata:", event.origin);
+          return;
         }
 
-        if (event.data && event.data.status === 'success') {
-            console.log("Login successful, salvataggio dati utente");
+        if (event.data && event.data.status === "success") {
+          console.log("Login successful, salvataggio dati utente");
 
-            const userData = {
-                status: 'success',
-                user_id: event.data.user_id,
-                username: event.data.username,
-                token: event.data.token,
-                profile_photo: event.data.profile_photo,
-                lastVerification: Date.now()
-            };
+          const userData = {
+            status: "success",
+            user_id: event.data.user_id,
+            username: event.data.username,
+            token: event.data.token,
+            profile_photo: event.data.profile_photo,
+            lastVerification: Date.now(),
+          };
 
-            localStorage.setItem('user_data', JSON.stringify(userData));
+          localStorage.setItem("user_data", JSON.stringify(userData));
 
-            updateProfileUI(userData);
-            startTokenVerification();
+          updateProfileUI(userData);
+          startTokenVerification();
 
-            document.getElementById('loginPopup').classList.remove('active');
+          document.getElementById("loginPopup").classList.remove("active");
         }
-    });
+      });
 
-    function updateProfileUI(data) {
+      function updateProfileUI(data) {
         console.log("Aggiornamento UI profilo con dati:", data);
-        const profileButton = document.getElementById('profile-button');
-        const accountLink = document.getElementById('account-link');
+        const profileButton = document.getElementById("profile-button");
+        const accountLink = document.getElementById("account-link");
 
         if (!profileButton) {
-            console.error("Pulsante profilo non trovato");
-            return;
+          console.error("Pulsante profilo non trovato");
+          return;
         }
 
-        profileButton.innerHTML = '';
+        profileButton.innerHTML = "";
 
-        if (data && (data.logged_in === true || data.status === 'success' || data.user_id)) {
-            const username = data.username || data.user_id || 'Utente';
+        if (
+          data &&
+          (data.logged_in === true || data.status === "success" || data.user_id)
+        ) {
+          const username = data.username || data.user_id || "Utente";
 
-            if (data.profile_photo) {
-                console.log("Tentativo di caricamento foto profilo:", data.profile_photo);
-                const img = document.createElement('img');
-                img.className = 'profile-pic';
-                img.alt = 'Foto profilo';
-                img.src = data.profile_photo;
+          if (data.profile_photo) {
+            console.log(
+              "Tentativo di caricamento foto profilo:",
+              data.profile_photo
+            );
+            const img = document.createElement("img");
+            img.className = "profile-pic";
+            img.alt = "Foto profilo";
+            img.src = data.profile_photo;
 
-                img.onerror = function () {
-                    console.log("Errore caricamento foto profilo, uso avatar di default");
-                    this.remove();
-                    const defaultAvatar = document.createElement('div');
-                    defaultAvatar.className = 'default-avatar';
-                    defaultAvatar.textContent = username.charAt(0).toUpperCase();
-                    profileButton.appendChild(defaultAvatar);
-                };
-
-                img.onload = function () {
-                    console.log("Foto profilo caricata con successo");
-                };
-
-                profileButton.appendChild(img);
-            } else {
-                console.log("Nessuna foto profilo, uso avatar di default");
-                const defaultAvatar = document.createElement('div');
-                defaultAvatar.className = 'default-avatar';
-                defaultAvatar.textContent = username.charAt(0).toUpperCase();
-                profileButton.appendChild(defaultAvatar);
-            }
-
-            if (accountLink) {
-                accountLink.href = `https://rena.altervista.org/account.php?user_id=${data.user_id}`;
-                accountLink.onclick = null;
-                accountLink.querySelector('span').textContent = 'Il mio account';
-                accountLink.querySelector('span').setAttribute('data-translate-it', 'Il mio account');
-                accountLink.querySelector('span').setAttribute('data-translate-en', 'My Account');
-            }
-
-            console.log("UI profilo aggiornata per utente loggato");
-        } else {
-            console.log("UI profilo impostata per utente non loggato");
-            const loginButton = document.createElement('div');
-            loginButton.className = 'default-avatar';
-            loginButton.innerHTML = '<i class="fas fa-user"></i>';
-            loginButton.onclick = openCrossDomainLogin;
-            profileButton.appendChild(loginButton);
-
-            if (accountLink) {
-                accountLink.href = "#";
-                accountLink.onclick = function (e) {
-                    e.preventDefault();
-                    openCrossDomainLogin();
-                };
-                accountLink.querySelector('span').textContent = 'Accedi';
-                accountLink.querySelector('span').setAttribute('data-translate-it', 'Accedi');
-                accountLink.querySelector('span').setAttribute('data-translate-en', 'Login');
-            }
-        }
-    }
-
-    function showLoginUI() {
-        console.log("Mostra UI login");
-        const profileButton = document.getElementById('profile-button');
-        const accountLink = document.getElementById('account-link');
-
-        if (profileButton && accountLink) {
-            profileButton.innerHTML = '<div class="default-avatar"><i class="fas fa-user"></i></div>';
-
-            const span = accountLink.querySelector('span');
-            if (span) {
-                span.setAttribute('data-translate-it', 'Accedi');
-                span.setAttribute('data-translate-en', 'Login');
-                span.textContent = 'Accedi';
-            }
-
-            accountLink.onclick = function (e) {
-                e.preventDefault();
-                openCrossDomainLogin();
+            img.onerror = function () {
+              console.log(
+                "Errore caricamento foto profilo, uso avatar di default"
+              );
+              this.remove();
+              const defaultAvatar = document.createElement("div");
+              defaultAvatar.className = "default-avatar";
+              defaultAvatar.textContent = username.charAt(0).toUpperCase();
+              profileButton.appendChild(defaultAvatar);
             };
 
-            accountLink.href = "#";
-        }
-    }
+            img.onload = function () {
+              console.log("Foto profilo caricata con successo");
+            };
 
-    async function verifyToken(token) {
+            profileButton.appendChild(img);
+          } else {
+            console.log("Nessuna foto profilo, uso avatar di default");
+            const defaultAvatar = document.createElement("div");
+            defaultAvatar.className = "default-avatar";
+            defaultAvatar.textContent = username.charAt(0).toUpperCase();
+            profileButton.appendChild(defaultAvatar);
+          }
+
+          if (accountLink) {
+            accountLink.href = `https://rena.altervista.org/account.php?user_id=${data.user_id}`;
+            accountLink.onclick = null;
+            accountLink.querySelector("span").textContent = "Il mio account";
+            accountLink
+              .querySelector("span")
+              .setAttribute("data-translate-it", "Il mio account");
+            accountLink
+              .querySelector("span")
+              .setAttribute("data-translate-en", "My Account");
+          }
+
+          console.log("UI profilo aggiornata per utente loggato");
+        } else {
+          console.log("UI profilo impostata per utente non loggato");
+          const loginButton = document.createElement("div");
+          loginButton.className = "default-avatar";
+          loginButton.innerHTML = '<i class="fas fa-user"></i>';
+          loginButton.onclick = openCrossDomainLogin;
+          profileButton.appendChild(loginButton);
+
+          if (accountLink) {
+            accountLink.href = "#";
+            accountLink.onclick = function (e) {
+              e.preventDefault();
+              openCrossDomainLogin();
+            };
+            accountLink.querySelector("span").textContent = "Accedi";
+            accountLink
+              .querySelector("span")
+              .setAttribute("data-translate-it", "Accedi");
+            accountLink
+              .querySelector("span")
+              .setAttribute("data-translate-en", "Login");
+          }
+        }
+      }
+
+      function showLoginUI() {
+        console.log("Mostra UI login");
+        const profileButton = document.getElementById("profile-button");
+        const accountLink = document.getElementById("account-link");
+
+        if (profileButton && accountLink) {
+          profileButton.innerHTML =
+            '<div class="default-avatar"><i class="fas fa-user"></i></div>';
+
+          const span = accountLink.querySelector("span");
+          if (span) {
+            span.setAttribute("data-translate-it", "Accedi");
+            span.setAttribute("data-translate-en", "Login");
+            span.textContent = "Accedi";
+          }
+
+          accountLink.onclick = function (e) {
+            e.preventDefault();
+            openCrossDomainLogin();
+          };
+
+          accountLink.href = "#";
+        }
+      }
+
+      async function verifyToken(token) {
         console.log("Verifica token in corso...");
         if (!token) return false;
 
         try {
-            const response = await fetch('https://rena.altervista.org/verify_token.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ token: token })
-            });
+          const response = await fetch(
+            "https://rena.altervista.org/verify_token.php",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ token: token }),
+            }
+          );
 
-            console.log("Status risposta:", response.status);
-            console.log("Status text:", response.statusText);
+          console.log("Status risposta:", response.status);
+          console.log("Status text:", response.statusText);
 
-            const result = await response.json();
-            console.log("Risultato verifica completo:", result);
+          const result = await response.json();
+          console.log("Risultato verifica completo:", result);
 
-            return result.valid === true;
+          return result.valid === true;
         } catch (error) {
-            console.error("Errore durante la verifica del token:", error);
-            return true;
+          console.error("Errore durante la verifica del token:", error);
+          return true;
         }
-    }
+      }
 
-    function refreshUserData() {
+      function refreshUserData() {
         console.log("Refresh dati utente");
-        const savedUserData = localStorage.getItem('user_data');
+        const savedUserData = localStorage.getItem("user_data");
 
         if (savedUserData) {
-            try {
-                const userData = JSON.parse(savedUserData);
-                if (userData.token) {
-                    fetch('https://rena.altervista.org/get_user_data.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ token: userData.token })
-                    })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            if (data.status === 'success') {
-                                const updatedUserData = {
-                                    ...userData,
-                                    ...data,
-                                    lastVerification: Date.now()
-                                };
-                                localStorage.setItem('user_data', JSON.stringify(updatedUserData));
-                                updateProfileUI(updatedUserData);
-                            } else {
-                                console.log("Refresh fallito, ma mantengo dati locali");
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Errore durante l'aggiornamento dei dati utente:", error);
-                        });
-                }
-            } catch (e) {
-                console.error("Errore parsing dati utente:", e);
+          try {
+            const userData = JSON.parse(savedUserData);
+            if (userData.token) {
+              fetch("https://rena.altervista.org/get_user_data.php", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ token: userData.token }),
+              })
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                  }
+                  return response.json();
+                })
+                .then((data) => {
+                  if (data.status === "success") {
+                    const updatedUserData = {
+                      ...userData,
+                      ...data,
+                      lastVerification: Date.now(),
+                    };
+                    localStorage.setItem(
+                      "user_data",
+                      JSON.stringify(updatedUserData)
+                    );
+                    updateProfileUI(updatedUserData);
+                  } else {
+                    console.log("Refresh fallito, ma mantengo dati locali");
+                  }
+                })
+                .catch((error) => {
+                  console.error(
+                    "Errore durante l'aggiornamento dei dati utente:",
+                    error
+                  );
+                });
             }
+          } catch (e) {
+            console.error("Errore parsing dati utente:", e);
+          }
         }
-    }
+      }
 
-    function startTokenVerification() {
+      function startTokenVerification() {
         console.log("Avvio verifica periodica token");
         if (tokenVerificationInterval) {
-            clearInterval(tokenVerificationInterval);
+          clearInterval(tokenVerificationInterval);
         }
 
         tokenVerificationInterval = setInterval(() => {
-            const savedUserData = localStorage.getItem('user_data');
-            if (savedUserData) {
-                try {
-                    const userData = JSON.parse(savedUserData);
-                    if (userData.token && !isVerifyingToken) {
-                        isVerifyingToken = true;
-                        verifyToken(userData.token)
-                            .then(valid => {
-                                isVerifyingToken = false;
-                                if (!valid) {
-                                    console.log("Token non valido, disconnessione");
-                                    localStorage.removeItem('user_data');
-                                    showLoginUI();
-                                    clearInterval(tokenVerificationInterval);
-                                }
-                            })
-                            .catch(error => {
-                                console.error("Errore verifica token:", error);
-                                isVerifyingToken = false;
-                            });
+          const savedUserData = localStorage.getItem("user_data");
+          if (savedUserData) {
+            try {
+              const userData = JSON.parse(savedUserData);
+              if (userData.token && !isVerifyingToken) {
+                isVerifyingToken = true;
+                verifyToken(userData.token)
+                  .then((valid) => {
+                    isVerifyingToken = false;
+                    if (!valid) {
+                      console.log("Token non valido, disconnessione");
+                      localStorage.removeItem("user_data");
+                      showLoginUI();
+                      clearInterval(tokenVerificationInterval);
                     }
-                } catch (e) {
-                    console.error("Errore parsing dati utente:", e);
-                    localStorage.removeItem('user_data');
-                    showLoginUI();
-                    clearInterval(tokenVerificationInterval);
-                }
-            } else {
-                clearInterval(tokenVerificationInterval);
+                  })
+                  .catch((error) => {
+                    console.error("Errore verifica token:", error);
+                    isVerifyingToken = false;
+                  });
+              }
+            } catch (e) {
+              console.error("Errore parsing dati utente:", e);
+              localStorage.removeItem("user_data");
+              showLoginUI();
+              clearInterval(tokenVerificationInterval);
             }
+          } else {
+            clearInterval(tokenVerificationInterval);
+          }
         }, 30000);
-    }
+      }
 
-    function loadSavedLanguage() {
-        const savedLang = localStorage.getItem('selectedLanguage');
+      function loadSavedLanguage() {
+        const savedLang = localStorage.getItem("selectedLanguage");
         if (savedLang) {
-            translatePage(savedLang);
+          translatePage(savedLang);
         }
-    }
+      }
 
-function translatePage(lang) {
-    console.log("Traduzione in:", lang);
-    localStorage.setItem('selectedLanguage', lang);
+      function translatePage(lang) {
+        console.log("Traduzione in:", lang);
+        localStorage.setItem("selectedLanguage", lang);
 
-    const languageOptions = document.querySelectorAll('.language-option');
-    languageOptions.forEach(option => {
-        if (option.getAttribute('data-lang') === lang) {
-            option.classList.add('active');
-        } else {
-            option.classList.remove('active');
-        }
-    });
-
-    const elementsToTranslate = document.querySelectorAll('[data-translate-it], [data-translate-en]');
-    elementsToTranslate.forEach(element => {
-        if (lang === 'it') {
-            element.textContent = element.getAttribute('data-translate-it');
-        } else if (lang === 'en') {
-            element.textContent = element.getAttribute('data-translate-en');
-        }
-    });
-
-    const placeholdersToTranslate = document.querySelectorAll('[data-placeholder-it], [data-placeholder-en]');
-    placeholdersToTranslate.forEach(element => {
-        if (lang === 'it') {
-            element.placeholder = element.getAttribute('data-placeholder-it');
-        } else if (lang === 'en') {
-            element.placeholder = element.getAttribute('data-placeholder-en');
-        }
-    });
-
-    const pageTitle = document.getElementById('page-title');
-    if (pageTitle) {
-        if (lang === 'en') {
-            pageTitle.textContent = 'Rena Arcades - Games';
-        } else {
-            pageTitle.textContent = 'Rena Arcades - Giochi';
-        }
-    }
-}
-
-        const searchInput = document.querySelector('.search-input');
-        const appCards = document.querySelectorAll('.app-card');
-        const noResults = document.querySelector('.no-results');
-
-        searchInput.addEventListener('input', function () {
-            const searchTerm = this.value.toLowerCase();
-            let hasResults = false;
-
-            appCards.forEach(card => {
-                const appName = card.querySelector('.app-name').textContent.toLowerCase();
-                if (appName.includes(searchTerm)) {
-                    card.style.display = 'flex';
-                    hasResults = true;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            if (hasResults) {
-                noResults.style.display = 'none';
-            } else {
-                noResults.style.display = 'block';
-            }
+        const languageOptions = document.querySelectorAll(".language-option");
+        languageOptions.forEach((option) => {
+          if (option.getAttribute("data-lang") === lang) {
+            option.classList.add("active");
+          } else {
+            option.classList.remove("active");
+          }
         });
-</script>
-</body>
 
+        const elementsToTranslate = document.querySelectorAll(
+          "[data-translate-it], [data-translate-en]"
+        );
+        elementsToTranslate.forEach((element) => {
+          if (lang === "it") {
+            element.textContent = element.getAttribute("data-translate-it");
+          } else if (lang === "en") {
+            element.textContent = element.getAttribute("data-translate-en");
+          }
+        });
+
+        const placeholdersToTranslate = document.querySelectorAll(
+          "[data-placeholder-it], [data-placeholder-en]"
+        );
+        placeholdersToTranslate.forEach((element) => {
+          if (lang === "it") {
+            element.placeholder = element.getAttribute("data-placeholder-it");
+          } else if (lang === "en") {
+            element.placeholder = element.getAttribute("data-placeholder-en");
+          }
+        });
+
+        const pageTitle = document.getElementById("page-title");
+        if (pageTitle) {
+          if (lang === "en") {
+            pageTitle.textContent = "Rena Arcades - Games";
+          } else {
+            pageTitle.textContent = "Rena Arcades - Giochi";
+          }
+        }
+      }
+
+      const searchInput = document.querySelector(".search-input");
+      const appCards = document.querySelectorAll(".app-card");
+      const noResults = document.querySelector(".no-results");
+
+      searchInput.addEventListener("input", function () {
+        const searchTerm = this.value.toLowerCase();
+        let hasResults = false;
+
+        appCards.forEach((card) => {
+          const appName = card
+            .querySelector(".app-name")
+            .textContent.toLowerCase();
+          if (appName.includes(searchTerm)) {
+            card.style.display = "flex";
+            hasResults = true;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (hasResults) {
+          noResults.style.display = "none";
+        } else {
+          noResults.style.display = "block";
+        }
+      });
+    </script>
+  </body>
 </html>
